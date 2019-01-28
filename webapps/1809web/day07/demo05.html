@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function test(){
+	//创建Date类新时候内部包含当前的
+	var d=new Date();
+	var time =d.getTime();
+	var str=d.toLocaleString();
+	console.log(d);
+	console.log(time);//显示在控制台上
+	console.log(str);
+	var d1=time;
+	var div=document.getElementById("d1");
+	div.innerHTML=d1;
+	
+}
+
+</script>
+</head>
+<body>
+<h1>Date类型</h1>
+<div id="d1" onclick="test()">测试</div>
+</body>
+</html>

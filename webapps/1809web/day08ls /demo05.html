@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function fn1(){
+		/* var i1 = document.getElementById("i1");
+		var i2 = document.getElementById("i2");
+		var d1 = document.getElementById("d1"); */
+		if(isNaN(i1.value)||isNaN(i2.value)){
+			d1.innerHTML="输入错误！";
+			return;
+		}
+		d1.innerHTML= parseFloat(i1.value)
+					+parseFloat(i2.value);
+	}
+	function fn2(){
+		var i1 = document.getElementById("i1");
+		var i2 = document.getElementById("i2");
+		var d1 = document.getElementById("d1");
+		if(isNaN(i1.value)||isNaN(i2.value)){
+			d1.innerHTML="输入错误！";
+			return;
+		}
+		d1.innerHTML= parseFloat(i1.value)
+					-parseFloat(i2.value);
+	}
+	function fn3(){
+		var i1 = document.getElementById("i1");
+		var i2 = document.getElementById("i2");
+		var d1 = document.getElementById("d1");
+		if(isNaN(i1.value)||isNaN(i2.value)){
+			d1.innerHTML="输入错误！";
+			return;
+		}
+		d1.innerHTML= parseFloat(i1.value)
+					*parseFloat(i2.value);
+	}
+	function fn4(){
+		var i1 = document.getElementById("i1");
+		var i2 = document.getElementById("i2");
+		var d1 = document.getElementById("d1");
+		if(isNaN(i1.value)||isNaN(i2.value)){
+			d1.innerHTML="输入错误！";
+			return;
+		}
+		d1.innerHTML= parseFloat(i1.value)
+					/parseFloat(i2.value);
+	}
+	
+	
+	function fn(x){
+		/* var i1 = document.getElementById("i1");
+		var i2 = document.getElementById("i2");
+		var d1 = document.getElementById("d1"); */
+		if(isNaN(i1.value)||isNaN(i2.value)){
+			d1.innerHTML="输入错误！";
+			return;
+		}
+		var result = 0;
+		switch(x){
+			case 1://+
+				result = parseFloat(i1.value)+parseFloat(i2.value);
+			break;
+			case 2://-
+				result = parseFloat(i1.value)-parseFloat(i2.value);
+			break;
+			case 3://*
+				result = parseFloat(i1.value)*parseFloat(i2.value);
+			break;
+			case 4:// /
+				result = parseFloat(i1.value)/parseFloat(i2.value);
+			break;
+		}
+		d1.innerHTML= result;
+	}
+</script>
+</head>
+<body>
+<input type="text" id="i1">
+<input type="text" id="i2">
+<input type="button" value="+" onclick="fn(1)">
+<input type="button" value="-" onclick="fn(2)">
+<input type="button" value="*" onclick="fn(3)">
+<input type="button" value="/" onclick="fn(4)">
+<div id="d1"></div>
+</body>
+</html>
+
+
+

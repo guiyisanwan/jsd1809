@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	body{
+		background-image: url("zombimgs/bg1.jpg");
+		overflow: hidden;
+	}
+	img{
+		position: absolute;
+		width: 80px;
+		height: 90px;
+	}
+	#success_h3{
+		float: left;
+	}
+	#fail_h3{
+		float: right;
+	}
+</style>
+<script type="text/javascript">
+	var successCount=0;
+	var failCount=0;
+
+	onload = function(){
+		changeBGSize();
+	}
+	onresize = function(){
+		changeBGSize();
+	}
+	function changeBGSize(){
+		var w = document.body.parentElement.clientWidth;
+		var h = document.body.parentElement.clientHeight;
+		document.body.style.backgroundSize = w+"px "+h+"px";
+	}
+	//开启添加僵尸图片的定时器
+	setInterval(function(){
+		var img = document.createElement("img");
+		//让图片和僵尸死亡数量建立关系
+		var type = parseInt(successCount/20);
+		if(type>3){
+			type=3;
+		}
+		
+		img.src = "zombimgs/zomb"+type+".png";
+		var w = document.body.parentElement.clientWidth;
+		var h = document.body.parentElement.clientHeight;
+		//设置图片的位置
+		img.style.left = w+"px";
+		img.style.top = 
+			Math.floor(Math.random()*(h-90))+"px";
+		document.body.appendChild(img);
+		//给图片动态绑定鼠标移入事件
+		img.onmouseover = function(){
+			//删除图片
+			document.body.removeChild(this);
+			//成功次数+1 
+			successCount++;
+			//显示成功次数
+			success_h3.innerHTML="成功次数："+successCount;
+		}
+		
+	},100);
+	//开启移动僵尸的定时器
+	setInterval(function(){
+		//得到所有的僵尸图片
+		var imgs = 
+			document.getElementsByTagName("img");
+		for(var i=0;i<imgs.length;i++){
+			//得到遍历的每个图片
+			var img = imgs[i];
+			//得到之前的left值 -2再赋值回去
+			var oldLeft = parseInt(img.style.left);
+			oldLeft-=2;
+			img.style.left=oldLeft+"px";
+			
+			//判断僵尸left值为0 则 删除僵尸图片
+			if(oldLeft<=0){
+				document.body.removeChild(img);
+				//失败次数+1
+				failCount++;
+				//把次数显示到h3里面
+				fail_h3.innerHTML="失败次数："+failCount;
+			}
+		}
+	},10);
+</script>
+</head>
+<body>
+<h3 id="success_h3">成功次数：0</h3>
+<h3 id="fail_h3">失败次数：0</h3>
+</body>
+</html>
+
+
+
+
+
+
+

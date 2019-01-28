@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div,p,input{
+border: 1px solid red;
+}
+
+</style>
+<script type="text/javascript">
+function myfu(){
+	var obj=event.target||event.srcElement;
+	alert(obj.nodeName);//输出元素名
+	
+}
+</script>
+</head><!-- 事件冒泡 -->
+<body>
+<div onclick="myfu()">
+<p >
+ <input type="button" value="按钮">
+ </p>
+ </div>
+</body>
+</html>

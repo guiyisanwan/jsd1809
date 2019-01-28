@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function fn(){
+		var arr = i1.value.split(i2.value);
+		//alert(arr);
+		for(var i=0;i<arr.length;i++){
+			var li = "<li>"+arr[i]+"</li>";
+			//把li装进ul里面
+			myul.innerHTML+=li;
+		}
+	}
+</script>
+</head>
+<body>
+<input type="text" id="i1">
+<input type="text" id="i2">
+<input type="button" value="添加"
+	 onclick="fn()">
+<hr>
+<ul id="myul">
+</ul>
+
+
+
+</body>
+</html>
+
+

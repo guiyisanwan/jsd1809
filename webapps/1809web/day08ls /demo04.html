@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function myfn(){
+		//得到用户输入的内容
+		var i = document.getElementById("i1");
+		var d = document.getElementById("d1");
+		//判断输入的内容是否是NaN 
+		if(isNaN(i.value)){
+			d.innerHTML="输入错误";
+			return;	
+		}
+		var result = i.value*i.value;
+		d.innerHTML = result;
+	}
+</script>
+</head>
+<body>
+<input type="text" id="i1">
+  <input type="button" value="平方" 
+  onclick="myfn()">
+  <div id="d1"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

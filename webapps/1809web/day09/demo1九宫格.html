@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.red{/*元素中尚未取类名,将次类名副给某些元素,就能使这些元素获得此类的各个性质*/
+width: 100px;
+height: 100px;
+border: px solid black;
+float:left;
+background-color: red;
+}
+.blue{
+width: 100px;
+height: 100px;
+border: px solid black;
+float:left;
+background-color: blue;
+}
+#in{
+display: block;
+margin-bottom: 20px;
+}
+#d1{
+width: 310px;
+
+}
+
+</style>
+<script type="text/javascript">
+ 	function checkfn(){
+ 		for(var i=0;i<9;i++){
+ 			var str="<div class='color'></div>"
+ 			str=str.replace("color",i%2==0?"red":"blue");
+ 		var div = document.getElementById("d1");//如果您需要查找文档中的一个特定的元素，最有效的方法是 getElementById()。
+ 		 
+ 		d1.innerHTML=d1.innerHTML+str;
+ 		}
+ 	}
+ 		
+</script>
+</head>
+<body>
+  <input type="button" id="in"  onclick="checkfn()">
+  <div id="d1"></div> 
+</body>
+</html>
+
+
+

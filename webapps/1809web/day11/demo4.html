@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+body{
+background-image: url("zombimgs/bg1.jpg");
+background-repeat: no-repeat;
+position:relative;
+}
+img{
+position: absolute;
+width: 80px;
+height: 90px;
+}
+#success_h3{
+float:left;
+}
+#failed_h3{
+float:right;
+}
+</style>
+<script type="text/javascript">
+var failed=0;
+var success=0;
+
+onload=function(){//使背景图片与窗口大小一致
+	changeBGSize();
+}
+onresize=function(){//使背景图片根据敞口尺寸的改变而改变
+	changeBGSize();
+	}
+	function changeBGSize(){
+		var w=document.body.parentElement.clientWidth;
+		var h=document.body.parentElement.clientHeight;
+		document.body.style.backgroundSize=w+"px "+h+"px";
+
+	}
+	//创造僵尸
+	setInterval(function(){
+		var img=document.createElement("img");
+		//让图片和僵尸死亡数量建立关系
+		var type=parseInt(failed/20);
+		if(type>3){
+			type=3;
+		}
+		
+		img.src="zombimgs/zomb"+type+".png";
+		
+		var w=document.body.parentElement.clientWidth;
+		var h=document.body.parentElement.clientHeight;
+		img.style.left=w+"px";
+		img.style.top=Math.floor(Math.random()*(h-90))+"px";
+		document.body.appendChild(img);
+		/*img.onclick=function(){
+			img.parentElement.removeChild(img);
+			success++;
+			success_h3.innerHTML="成功此数:"+success;*/
+			img.onmouseover=function(){
+				document.body.removeChild(img);
+				success++;
+				success_h3.innerHTML="成功此数:"+success;
+		}
+	},1000)
+	//让僵尸移动
+	
+	setInterval(function(){
+		var arr=document.getElementsByTagName("img");
+		for(var i=0;i<arr.length;i++){
+			var img=arr[i];
+			var oldLeft=parseInt(img.style.left);//将字符攒转化为整数
+			oldLeft-=2;
+			img.style.left=oldLeft+"px";
+			if(oldLeft<=0){
+				document.body.removeChild(img)
+				failed++;
+				failed_h3.innerHTML="失败此数:"+failed;//再次副值
+			}
+
+		}
+	},10)
+	
+</script>
+</head>
+<body>
+<h3 id="success_h3">成功此数:0</h3>
+<h3 id="failed_h3">失败此数</h3><!-- 初次副值 -->
+</body>
+</html>

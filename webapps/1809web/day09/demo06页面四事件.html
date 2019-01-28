@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+onclick=function(){
+	//alert("点级了")
+	
+}
+alert("aaa")
+/*页面加在完成事件*/
+onload=function(){
+	alert("加载完成了")
+	i1.value="xxx"
+	//如果页面初始化是要对页面进行修改,一定要把修改代码些在onload里面
+}
+alert("bbb")
+
+onfocus=function(){
+	console.log("获取焦点")
+}
+onblur=function(){
+	console.log("失去焦点")
+}
+</script>
+</head>
+<body>
+<input type="text" id="i1">
+</body>
+</html>

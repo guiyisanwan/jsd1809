@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	alert("内部引入js"); 
+</script>
+<!-- 如果script标签引入了外部js文件
+	则不能在标签体内继续写js代码 -->
+<script type="text/javascript" 
+	src="demo01.js">
+	alert("啦啦啦"); //不执行
+	</script>
+</head>
+<body>
+<input type="button" value="点我试试" 
+	onclick="alert('试试就试试')">  
+</body> 
+</html> 
+
+
+
+
+

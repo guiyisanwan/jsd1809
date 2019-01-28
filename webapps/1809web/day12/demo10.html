@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.item{
+border: 1px solid red;
+width: 100px;
+height: px;
+}
+.sup{
+border: 1px solid red;
+width: 200px;
+}
+</style>
+</head>
+<body>
+<h1>选择显示,隐藏的元素</h1>
+<div id='menu'>
+    <div class='item'>Java基础</div>
+    <div class='sub'>变量,数据类型,流程控制,面向对象</div>
+	  <div class='item'>Java核心API</div>
+	  <div class='sub'>
+	  String,Object,集合,Thread,IO
+	  </div>
+</div>
+</body>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//监听器玄霆事件
+	$('#menu>.item').mouseover(function(){
+		//console.log('over')
+		//hide()通过设置内敛样式,隐藏元素
+		$('#menu>.sub:visible').hide(500);
+		//this 代表响应"当前"事件的dom元素
+		$(this).next().show(500);//this只代表一个事件源 
+	})
+})
+</script>
+</body>
+</html>

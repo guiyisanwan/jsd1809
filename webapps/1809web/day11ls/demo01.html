@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- <style type="text/css">
+	li>ul{
+		display: none;
+	}
+</style> -->
+<script type="text/javascript">
+	
+	onload = function(){
+		/* 通过js代码让页面中第二层的ul隐藏 */
+		var arr = 
+			document.getElementsByClassName("second_ul");
+		for(var i=0;i<arr.length;i++){
+			//让ul通过内联样式隐藏
+			arr[i].style.display="none";
+		}
+	}
+	
+	
+	function myfn(li){
+		
+		//得到当前点击的ul
+		var ul = li.getElementsByTagName("ul")[0];
+		//先得到所有二层ul 让其他ul全部隐藏
+		var arr = 
+			document.getElementsByClassName("second_ul");
+		for(var i=0;i<arr.length;i++){
+			//判断和当前ul不等
+			if(arr[i]!=ul){
+				arr[i].style.display="none";
+			}
+		}
+		
+		
+		//alert(ul.nodeName);
+		//alert(ul.style.display);
+		//判断如果ul隐藏则让其显示 
+		//如果显示则让其隐藏
+		if(ul.style.display=="none"){
+			ul.style.display = "block";
+		}else{
+			ul.style.display="none";
+		}
+	}
+</script>
+</head>
+<body>
+	<ul>
+		<li onclick="myfn(this)">同学
+			<ul class="second_ul">
+				<li>刘德华</li>
+				<li>张学友</li>
+				<li>郭富城</li>
+			</ul>
+		</li>
+		<li onclick="myfn(this)">亲戚
+			<ul class="second_ul">
+				<li>习大大</li>
+				<li>老干妈</li>
+				<li>凤姐</li>
+			</ul>
+		</li>
+		<li onclick="myfn(this)">女友
+			<ul class="second_ul">
+				<li>美女1</li>
+				<li>美女2</li>
+				<li>美女3</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>
+
+
+

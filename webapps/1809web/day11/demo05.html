@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function allfu(all){
+var items=document.getElementsByName("item");
+for(var i=0;i<items.length;i++){
+	//items[i].checked="checked";//.checked返回值是布尔之,true,false
+	items[i].checked=all.checked;//代表全选的那个输入框的checked
+}
+calfu();
+}
+function calfu(){
+	var total=0;
+	var items=document.getElementsByName("item");
+	for(var i=0;i<items.length;i++){
+		if(items[i].checked){
+			total+=parseInt(items[i].value);
+		}
+	}
+	total_span.innerHTML="总价:"+total+"元";
+}
+</script>
+</head>
+<body>
+<h1>购物车订单练习</h1>
+<input type="checkbox" name="item"  onclick="calfu()" value="5000">1华为手机5000元<br>
+<input type="checkbox"name="item" onclick="calfu()"value="50">2手机壳50元<br>
+<input type="checkbox"name="item" onclick="calfu()"value="50">3手机链5000元<br>
+<input type="checkbox"name="item" onclick="calfu()"value="10">4手机莫10元<br>
+<input type="checkbox"name="item" onclick="calfu()"value="100">5手机卡100元<br>
+<input type="checkbox" onclick="allfu(this)">6全选<br>
+<span id="total_span">总价:0元</span>
+</body>
+</html>

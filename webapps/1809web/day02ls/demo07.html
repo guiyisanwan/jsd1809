@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- action:提交地址 
+method提交方式：get（默认）将请求参数放在请求地址的后面、
+post是将请求参数放在请求体里面 -->
+<form action="http://www.tmooc.cn" 
+	method="get">
+	<!-- placeholder：占位文本
+	name:作为传递参数的key，
+	必须写 不写则不会传递该参数 
+	value:设置初始默认值
+	maxlength:设置最大长度
+	readonly:只读
+	-->
+	用户名：<input type="text" 
+		placeholder="请输入用户名" 
+		name="username"
+		value="abc"
+		maxlength="5"
+		readonly="readonly"><br>
+	密码：<input type="password" 
+			name="password"
+			placeholder="请输入密码"><br> 
+	性别：<input type="radio" name="gender"
+	 value="nan" id="nan"> 
+	<label for="nan">男</label>  
+	<!-- checked 默认选中 -->
+	<input type="radio" name="gender" 
+	value="nv" id="nv" checked="checked"><label for="nv">女</label>
+	
+	<br>兴趣爱好：
+	<input type="checkbox" name="hobby" value="lq">打篮球
+	<input type="checkbox" name="hobby" value="code" checked="checked">撸代码
+	<input type="checkbox" name="hobby" value="wz">王者农药
+	<!-- 日期选择器 -->
+	<br>生日：<input type="date" name="birthday">
+	<!-- 文件选择器 -->
+ 	<br>靓照：<input type="file" name="pic">
+ 	<!-- 下拉选 -->
+ 	<br>所在城市：
+ 		<select name="city">
+ 			<option>请选择</option>
+ 			<option value="bj" 
+ 				selected="selected">北京</option>
+ 			<option value="sh">上海</option>
+ 			<option value="gz">广州</option>
+ 		</select>
+ 		<!-- 文本域 -->
+ 	<br>个人简介：
+ 	<textarea rows="3" cols="20" name="intro">这家伙很懒，什么都没留下。。。</textarea>
+ 	<!-- 隐藏域 当需要给服务器传递
+ 		某些不需要给用户展示的信息时使用 -->
+ 	<input type="hidden" name="xxx" value="yyy">
+	<br><input type="submit" value="注册">
+	<input type="reset" value="重写">  
+	<input type="button" value="自定义按钮"> 
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

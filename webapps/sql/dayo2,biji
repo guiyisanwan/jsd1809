@@ -1,0 +1,307 @@
+insert into dept values(null,'集团总部','北京',null),(null,'教研部','北京',1),(null,'Java一部','大钟寺',2),(null,'市场部','天安门',1),(null,'人事部','北京',1)(null,'薪酬不部','八达领长城',5);
+
+
+insert into emp values(null,'苍老师',18,2000,3);
+insert into emp values(null,'刘备',25,800,1),(null,'张飞',18,400,5);
+
+
+
+
+create table user(id int primary key auto_increment,
+name varchar(10),money int,state varchar(10));
+insert into user values(null,'苍老师A',50,'正常'),
+(null,'苍老师B',0,'冻结'),(null,'刘老师',10000,'正常');
+update user set money=money-2000 where id=3 and state='正常';
+update user set money=money+2000 where id=2 and state='正常';
+
+begin;
+update user set money=money-2000 where id=3 and state='正常';
+update user set money=money+2000 where id=2 and state='正常';
+rollback;
+
+begin;
+update user set money=money-2000 where id=3 and state='正常';
+update user set money=money+2000 where id=1 and state='正常';
+commit;
+//指令都成功则提交,mysql才回把几条指令一起发送给硬盘;使里面的数据发生改变
+
+begin;
+update user set money=10 where id=2;
+savepoint s1;
+update user set money=20 where id=2;
+savepoint s2;
+update user set money=30 where id=2;
+savepoint s3;
+rollback to s1;
+rollback to s2;
+rollback to s3;
+只能回一次
+
+truncate user;
+create table t_int(id int ,age int(10) zerofill);
+insert into t_int values (1,18);
+select * from t_int;
+
+
+create table t_date(d1 date ,d2 time,d3 datetime ,d4 timestamp);
+insert into t_date values('2018-12-14',null,null,null);
+insert into t_date values(null,'18:08:38','2018-12-14 18:09:22',null);
+
+
+
+
+笔记ls
+###课程回顾：
+1. 数据库相关SQL
+- 查询所有   show databases;
+- 创建 create database db1 character set utf8/gbk;
+- 查看详情 show create database db1;
+- 删除 drop database db1;
+- 使用 use db1;
+2. 表相关SQL
+- 创建  create table t1(name varchar(10),age int) engine=myisam/innodb default charset=utf8/gbk;
+- 查询所有  show tables;
+- 查看详情  show create table t1;
+- 查看表字段  desc t1;
+- 删除表   drop table t1;
+- 修改表名 rename table t1 to t2;
+- 修改引擎字符集  alter table t1  engine=myisam/innodb default charset=utf8/gbk;
+- 添加字段  alter table t1 add age int first/after xxx;
+- 删除字段  alter table t1 drop age;
+- 修改字段名和类型  alter table t1 change 原名 新名 新类型
+- 修改字段类型和位置  alter  table t1 modify 字段名 新类型 first/after xxx;
+3. 数据相关SQL
+- insert into t1 (字段名1,字段名2) values(值1,值2),(值1,值2);
+- select name,age from t1 where id=10;
+- update t1 set age=18 where id=5;
+- delete from t1 where id=1;
+
+###练习：
+1. 创建mydb2 指定字符集为utf8, 并使用
+	create database mydb2 character set utf8;
+	use mydb2;
+2. 创建员工表emp 字段：编号id,姓名name,工资sal,部门名dept
+	create table emp(id int,name varchar(10),sal int,dept varchar(10));
+3. 插入奖金字段comm 在部门名的前面
+	alter table emp add comm int after sal;
+4. 修改工资sal到最后面  5. 删除comm字段
+	alter table emp modify sal int after dept;
+	alter table emp drop comm;
+6. 插入刘关张三个人 工资分别为5000 4000 3000,部门为三国部，编号为123
+插入取经师徒四个人工资分别为800 700 600 500，部门为取经部，编号为4567
+	insert into emp values(1,'刘备','三国部',5000),(2,'关羽','三国部',4000),(3,'张飞','三国部',3000),(4,'唐僧','取经部',800),(5,'悟空','取经部',700),(6,'八戒','取经部',600),(7,'沙僧','取经部',500);
+7. 修改唐僧的名字为玉帝哥哥
+	update emp set name='玉帝哥哥' where name='唐僧';
+8. 插入工作地点字段在部门名的后面
+	alter table emp add loc varchar(10) after dept;
+9. 修改三国部的地点在蜀国
+	update emp set loc='蜀国' where dept='三国部';
+10. 删除刘备
+	delete from emp where name='刘备';
+11. 修改工资低于700的工资为1000
+	update emp set sal=1000 where sal<700;
+12. 删除取经部的员工
+	delete from emp where dept='取经部';
+13. 删除表
+	drop table emp;
+14. 删除库
+	drop database mydb2;
+
+###主键约束
+	create database db2 character set utf8;
+	use db2;
+- 什么是主键： 表示每条数据唯一性的字段为主键
+- 什么是约束： 约束是创建表时给字段添加的限制条件
+- 什么是主键约束： 主键约束可以保证主键的值唯一且非空
+	create table t1(id int primary key,name varchar(10));
+	insert into t1 values(1,'Tom'); //成功
+	insert into t1 values(1,'Jerry'); //报错 不能重复
+	insert into t1 values(null,'Jerry'); //报错 值不能为null
+- 主键约束+自增
+	create table t2(id int primary key auto_increment,name varchar(10));
+	insert into t2 values(1,'Tom'); //成功 自增也可以赋值
+	insert into t2 values(null,'Tom');//成功 触发自增
+	insert into t2 values(null,'Jerry');//成功 触发自增
+	
+	insert into t2 values(100,"AAA"); //100
+	insert into t2 values(null,'BBB');//101
+	delete from t2 where id>=100;
+	insert into t2 values(null,'CCC');//102
+	insert into t2 values(0,'CCC');//触发自增 0等效null
+- 自增数值只增不减 
+- 从历史最大值的基础上+1
+- 添加了自增之后 主键值不能为0 
+####注释 comment
+- 用于对表的字段进行描述
+	create table t3(id int primary key auto_increment comment '这是主键',name varchar(10) comment '这是名字');
+	show create table t3; //查看注释
+#### `和'
+- `：用于修饰表名和字段名 
+	create table `t4`(`name` varchar(10));
+- ':用于修饰字符串
+####数据冗余
+- 主键：表示数据唯一性的字段。
+- 外键：用于建立两张表关系的字段。
+- 由于表设计不够合理导致数据量增大时出现大量的重复数据，这种现象称为数据冗余，通过拆分表的形式解决冗余问题。
+- 案例：设计表保存以下数据：
+	1. 集团总部下教学研发部下Java教学一部的苍老师一枚，工资2000，年龄18，部门地点大钟寺
+	2. 市场部下的刘备，工资800，年龄25，部门地点天安门
+	3. 人事部下的薪酬部的员工张飞，工资400 年龄18 部门地点八达岭长城
+	部门表 员工表
+	- 创建员工表  编号 姓名 年龄 工资 部门编号
+		create table t_emp(id int primary key auto_increment,name varchar(10),age int,sal int,deptid int);
+	- 创建部门表  编号 名字 部门地点 上级部门编号
+		create table t_dept(id int primary key auto_increment,name varchar(10),loc varchar(10),parentid int);
+	- 插入数据
+		insert into t_dept values(null,'集团总部','北京',null),(null,'教研部','北京',1),(null,'Java一部','大钟寺',2),(null,'市场部','天安门',1),(null,'人事部','北京',1),(null,'薪酬部','八达岭长城',5);
+		insert into t_emp (name,age,sal,deptid) values('苍老师',18,2000,3),('刘备',25,800,4),('张飞',18,400,6);
+- 练习：请设计表保存以下数据
+	1. 家电分类下电视机分类下的夏普50寸液晶电视，价格5000，库存25个
+	2. 办公耗材分类下的打印机分类下的惠普彩色打印机价格3000，库存10个
+		分类表category(id,name,parentid)
+		商品表item(id,name,price,num,categoryid)
+	- 创建表：
+		create table category(id int primary key auto_increment,name varchar(10),parentid int);
+		create table item(id int primary key auto_increment,name varchar(10),price int,num int,categoryid int);
+	- 插入数据：
+		insert into category (name,parentid) values('家电',null),('电视机',1),('办公耗材',null),('打印机',3);
+		
+		insert into item (name,price,num,categoryid) values ('夏普50寸液晶电视',5000,25,2),('惠普彩色打印机',3000,10,4);
+####事务
+- 什么是事务：事务是数据库中执行同一业务多条SQL语句的工作单元，可以保证多条SQL全部执行成功或全部执行失败。
+
+	create table user(id int primary key auto_increment,name varchar(10),money int,state varchar(5));
+	insert into user values(null,'苍老师A',50,'正常'),
+	(null,'苍老师B',0,'冻结'),(null,'刘老师',10000,'正常');
+	-转账失败SQL：
+	刘老师-2000
+	update user set money=money-2000 where id=3 and state='正常';
+	苍老师B+2000
+	update user set money=money+2000 where id=2 and state='正常';
+ 	- 以上代码一条成功，一条失败，导致刘老师莫名丢了2000块钱，通过事务解决以上问题
+	1. 开启事务
+		begin;
+	2. 执行转账业务SQL
+		update user set money=money-2000 where id=3 and state='正常';
+		update user set money=money+2000 where id=1 and state='正常';
+	3. 如果全部成功执行提交事务
+		commit;
+	4. 如果部分成功执行回滚事务
+		rollback;
+- 保存回滚点 savepoint 
+- 格式： savepoint 标识;
+	begin;
+	sql1
+	savepoint s1;
+	sql2
+	savepoint s2;
+	sql3
+	rollback to s2;
+- 测试回滚点：
+	begin;
+	update user set money=10 where id=2;
+	savepoint s1;
+	update user set money=20 where id=2;
+	savepoint s2;
+	update user set money=30 where id=2;
+
+###SQL分类
+1. DDL Data Definition Language 数据定义语言
+- 包括：create 、 drop 、alter、truncate
+- truncate:删除表并创建新表  和使用delete清空表不同的是，自增数值会清零  
+- 不支持事务
+2. DML Data Manipulation Language 数据操作语言
+- 包括：insert update delete select（DQL）
+- 支持事务
+3. DQL Data Query Language 数据查询语言
+- 只包括select
+4. TCL Transaction事务 Control控制 Language ，事务控制语言
+- 包括：begin，commit，rollback，savepoint xxx,rollback to xxx;
+5. DCL Data Control Language 数据控制语言
+- 分配用户权限相关SQL 
+
+###数据类型
+1. 整数
+- 常用整数有 int(m) 和 bigint(m)  ，m代表显示长度， 需要结合zerofill关键字使用 
+		create table t_int(id int,age int(10) zerofill);
+		insert into t_int values(1,18);
+		select * from t_int;	 
+2. 浮点数
+- double(m,d) m代表总长度 d代表小数长度 
+	如：76.323      m=5 d=3
+- decimal(m,d) m代表总长度 d代表小数长度,超高精度浮点数，需要涉及超高精度运算时使用
+3. 字符串
+- char(m)：固定长度,m=10,abc 所占长度为10,效率略高  最长255
+- varchar(m)：可变长度，m=10,abc 所占长度为3, 节省空间 最长65535,超高255建议使用text
+- text：可变长度  最大65535  保存大于255长度的文本 
+4. 日期
+- date: 只保存年月日
+- time: 只保存时分秒
+- datetime: 保存年月日时分秒，最大值9999-12-31,默认值为null
+- timestamp时间戳:保存年月日时分秒,最大值2038-01-19,默认值为当前系统时间
+- 练习：创建时间的表
+	create table t_date(d1 date,d2 time,d3 datetime,d4 timestamp);
+	insert into t_date values('2018-12-14',null,null,null);
+	insert into t_date values(null,'18:08:38','2018-12-14 18:09:22',null);
+
+###课程回顾
+1. 主键约束：唯一且非空  primary key auto_increment
+2. 自增：  只增不减  从历史最大值基础+1  主键值不能为0 
+3. 注释 comment
+4. `用于修饰表名和字段名   
+5. 数据冗余，重复数据  通过拆分表解决  
+6. 事务：数据库中执行同一业务多条SQL语句的工作单元，可以保证全部执行成功或全部执行失败  ，begin； commit；  rollback； savepoint xxx;rollback to xxx;
+7. SQL分类：
+- DDL数据定义语言，包括create drop alter truncate，不支持事务
+- DML数据操作语言，包括：insert delete update select(DQL) 支持事务
+- DQL数据查询语言，只包括select
+- TCL事务控制语言，包括：begin commit rollback 。。。
+- DCL数据控制语言，分配用户权限相关SQL
+8. 数据类型
+- 整数： int(m) bigint(m)  m代表显示长度 zerofill
+- 浮点数： double(m,d)m代表总长度 d代表小数长度  decimal(m,d)
+- 字符串: char:固定长度，效率高，最大255  varchar：可变长度 最大65535超过255建议text 节省空间   text：可变长度 最大65535 
+- 日期： date保存年月日  time时分秒   datetime 最大9999-12-31 默认null timestamp：最大2038-1-19  默认当前时间 
+###day01
+1. 数据库相关：
+- 创建 create database db1 character set utf8/gbk;
+- 查询所有 show databases;
+- 查询详情  show create database db1;
+- 删除  drop database db1;
+- 使用  use db1;
+2. 表相关：
+- 创建表 create table t1(name varchar(10),age int) engine=innodb/myisam charset=utf8/gbk;
+- 查询所有 show tables;
+- 查询详情 show create table t1;
+- 表字段  desc t1;
+- 删除表  drop table t1;
+- 修改表名 rename table t1 to t2;
+- 修改引擎字符集  alter table t1 engine=innodb/myisam charset=utf8/gbk;
+- 添加表字段 ： alter table t1 add age int first/after xxx;
+- 删除字段： alter table t1 drop age; 
+- 修改字段名和类型： alter table t1 change 原名 新名 新类型;
+- 修改字段类型和位置: alter table t1 modify 字段名 新类型 first/after xxx;
+3. 数据相关
+- 插入  insert into t1(字段1,字段2) values(xxx,xxx),(yyy,yyy);
+- 查询 select * from t1 where id=10;
+- 修改 update t1 set age=18 where id=20;
+- 删除 delete from t1 where id=5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

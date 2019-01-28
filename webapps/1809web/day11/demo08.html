@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function downfn(){
+	console.log("键盘按下字符编码:"+event.keyCode);
+if(event.keyCode==13)	{
+//	alert("啦啦啦")
+	login_btn.onclick();
+}
+}
+function upfn(){
+	var str=String.fromCharCode(event.keyCode);//event.keyCode,出發事件的按鍵所對應的unicom編碼
+	alert("键盘抬起"+str);//fromCharCode从字符编码创建一个字符串。
+	
+}
+onload=function(){
+	btn.onclick=function(){
+		//var obj=event.target||event.srcElement;//srcElement对于生成事件的 Window 对象、Document 对象或 Element 对象的引用
+		alert("式式就式式");//即事件源標前
+		alert("式式就式式"+this.id)//this代指事件源那个标签//當前事件所屬表前
+	}
+}
+</script>
+</head>
+<body>
+<input type="text" onkeydown="downfn()" onkeyup="upfn()">
+<input type="button" id="login_btn" value="登录" onclick="alert('登录成功')">
+<input type="button" id="btn" value="点我是是" >
+</body>
+</html>

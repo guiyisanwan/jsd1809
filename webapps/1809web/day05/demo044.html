@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/* html{
+border: 5px solid black;
+} */
+#big{
+border:1px solid black;
+width:200px;
+height:200px;
+background-color: green;
+position: relative;/*不脱离文档流,相对于其原来位置*/
+top: 50px;
+left: 50px;
+}
+
+#middle{
+position:fixed;/*脱离文单流,在不移动的情况下其位值相对于其上级元素,随上级元素而动,却不随页面的拖动而动*/
+left:8px;/*在移动的请宽下,相对于敞口顶点移动,然后固定*/
+border:1px solid black;
+width:100px;
+height:100px;
+background-color:red;
+margin-top: 10px;
+}
+#small{
+border:1px solid black;
+width:30px;
+height:30px;
+position:absolute;/*脱离文单流,相对于离奇最近的非静态位置元素的顶角,随页面拖动而动*/
+left:20px;
+top:20px;
+background-color:white;
+
+text-align: center;
+line-height: 30px;
+font-size: 1px;
+}
+</style>
+</head>
+<body>
+<div id="big">
+	<div id="middle" >
+		<div id="small">3d</div>
+	</div>
+</div>
+<div id="big">
+	<div id="middle" >
+		<div id="small">3d</div>
+	</div>
+</div>
+<div id="big">
+	<div id="middle" >
+		<div id="small">3d</div>
+	</div>
+</div>
+<div id="big">
+	<div id="middle" >
+		<div id="small">3d</div>
+	</div>
+</div>
+<div id="big">
+	<div id="middle" >
+		<div id="small">3d</div>
+	</div>
+</div>
+<div id="big">
+	<div id="middle" >
+		<div id="small">3d</div>
+	</div>
+</div>
+</body>
+</html>

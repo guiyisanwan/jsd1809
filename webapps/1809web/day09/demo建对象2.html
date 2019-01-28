@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function Person(){
+	}
+var p= new Person();
+p.name="关羽"
+p.age=10;
+p.run=function(){
+	alert("name"+this.name+"age:"+this.age)
+}
+p.run();
+
+var p2 ={
+		"name":"曹操",
+		"age":18,
+		"run":function(){
+			alert("name"+this.name+"age:"+this.age);
+		}
+}
+p2.run();
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>/*标签即框*/
+<style type="text/css">
+/*标签即框*/
+/*块级元素加内边距，全部生校，边框外扩，会影响元素所占宽高,宽高变大  内容外推*//*初始状态下，内容空间与边框重合
+生校即边框外扩，影响即内容外推*//* 元素三要素 边框，内容空间，文本*/
+#d1{width: 10px;height: 100px;border: 1px solid red; 
+padding-top:20px ;padding-left:30px ;color: red;font-size: 100px;}
+#big{width: 70px;height: 80px;background-color: green;padding-left: 30px;padding-top:20px; }
+#small{ width:30px;height:30px ;background-color: blue;}
+#s1{border: 1px solid purple;padding-left: 20px;padding-right: 20px;padding-top: 20px;padding-bottom: 20px;}
+/*行内元素加内编剧全生校，外扩，会影向元素所占宽度，变宽，外推，不影响元素所占高度，不外推，而是覆盖叠加，元素者，框中内容也*/
+/*生校，即边框外扩，影响即内容外推*//*元素，元素内容空间，内容边界与边框之距*/ 
+</style>
+</head>
+<body>
+<div id="d1">div1</div>
+<span id="s1">span1</span>
+<span id="s2">span2</span>
+<div id="big">
+	<div id="small"></div>
+</div>
+</body>
+</html>

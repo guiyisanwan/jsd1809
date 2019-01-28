@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>选择器</h1>
+	<p>选择当前元素开始，后续全部的兄弟元素</p>
+	
+	<h2>JQuery API</h2>
+	<p>选择器</p>
+	<p>dom操作</p>
+	<p>事件绑定</p>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+//选择 h2 开始后续的 p 元素  'h2 ~ p'
+$(function(){
+	$('h2 ~ p').append("OK");	
+});
+
+</script>	
+</body>
+</html>
+
+
+
+

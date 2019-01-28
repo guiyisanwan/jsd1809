@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#big{
+		width: 200px;
+		background-color: purple;
+		border: 5px  ridge red;
+		
+		overflow: hidden;/*overflow让元素里面的内容溢出,hidden,让溢出效应隐藏,flow是流的意思,visible看的见的,inherit继承*/
+	}
+	#d1,#d2,#d3{
+		width: 50px;
+		height: 50px;
+		float: ;/*依次右移,最先移者靠右*/
+	}
+	#d1{
+		background-color:white;
+		float:right ;/* 块级元素自带清除两侧元素功能,指有移动,才会弗起来,只有副起来,其清除两侧元素的功能才会失效*/
+		clear: ;
+	}
+	#d2{
+		background-color: green;
+		float:right ;
+		clear:right ;
+	}
+	#d3{
+		background-color: blue;
+		float: ;
+		clear:right;
+	}
+	ul{
+		/* 去掉ul的点 */
+		list-style-type: none;
+	}
+	li{
+		float: left;
+		width: 100px;
+	}
+
+</style>
+</head>
+<body>
+
+
+<div id="big">
+	<div id="d1"></div>
+	<div id="d2"></div>
+	<div id="d3"></div>
+</div>
+
+<ul>
+	<li>床垫</li>
+	<li>客厅灯</li>
+	<li>冲锋枪</li>
+	<li>垃圾桶</li>
+	<li>意大利炮</li>
+	<li>苍老师</li>
+</ul>
+
+</div>
+</body>
+</html>

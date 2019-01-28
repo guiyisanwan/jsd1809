@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function test(){
+	//Fixed 固定的,返回固定小数点位
+	//输出价格等情况
+	var num =3.1415926;
+	console.log(num.toFixed(2));
+	console.log(num.toFixed(4));
+	var str="tedu.cn";
+	var n =str.indexOf("cn");
+	console.log(n);
+	var c=str.charAt(5);
+	console.log(c);
+	// var str="test"
+	//console.log(str.bold());
+	//console.log(str.fontcolor("red"));
+		
+}
+function demo01(){
+	var str="测试";
+	var msg=str.bold();
+	var div=document.getElementById("msg");
+	//console.log(str.bold());
+	div.innerHTML=msg;
+}
+function demo02(){
+	var str="测试";
+	var m=str.fontcolor("red");
+	var div=document.getElementById("m");
+	//console.log(str.fontcolor("red"));
+	div.innerHTML=m;
+}
+</script>
+</head>
+<body>
+<h1>Number和String</h1>
+<p onclick="test()">测试</p>
+<h1>页面局部刷新</h1>
+<div id="msg" onclick="demo01()">加粗</div>
+<div id="m" onclick="demo02()" >红色</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery Demo</title>
+</head>
+<body>
+	<h1>认识JQuery对象</h1>
+	<p>JQuery 对象，扩展于 JS Array 对象</p>
+	<div class="demo">A</div>
+	<div class="demo">B</div>
+	<div class="demo">C</div>
+	<div class="demo">D</div>
+
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+//使用JQuery选择一组对象，$()返回值是一个数组
+var obj = $('.demo');
+console.log(obj);//每个数组元素是一个dom<div>对象
+console.log(obj[0]);
+console.log(obj[1]);
+console.log(obj[2]);
+console.log(obj[3]);
+
+//操作JQuery中每个对象，将每个对象html中的文本都改了
+obj.html("demo");
+
+//为数组扩展方法
+var arr = ["Tom", "Jerry", "熊大"];
+arr.test = function(){
+	console.log("Hello World!");
+};
+arr.test();
+
+</script>
+</body>
+</html>
+
+
+

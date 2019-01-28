@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div{
+		width: 1000px;
+		height: 1000px;
+		border: 1px solid red;
+		position: relative;/* 做位置参考 */
+	}
+	img{
+		position:absolute;
+		width: 40px;
+		height: 40px;
+	}
+</style>
+<script type="text/javascript">
+	var timer =	setInterval(function(){
+			//得到之前显示的数量+1再赋值回去
+			var count = parseInt(count_h3.innerHTML);
+			count_h3.innerHTML = ++count;
+			if(count>=50){
+				clearInterval(timer);
+				document.body.removeChild(d1);
+				alert("GameOver!");
+			}
+			var img = document.createElement("img");
+			img.src="../imgs/2.gif";
+			//控制随机位置
+			img.style.left = 
+				  Math.floor(Math.random()*960)+"px";
+			img.style.top = 
+				  Math.floor(Math.random()*960)+"px";
+			//添加到div中 
+			d1.appendChild(img);
+			
+			//事件的动态绑定 
+			img.onmouseover = function(){
+				//删除图片
+				//动态绑定的事件中 this为事件源 
+				d1.removeChild(this);
+				var count = parseInt(count_h3.innerHTML);
+				count_h3.innerHTML = --count;
+			}
+		},100);
+</script>
+</head>
+<body>
+<h3 id="count_h3">0</h3>
+<div id="d1"></div>
+</body>
+</html>
+
+

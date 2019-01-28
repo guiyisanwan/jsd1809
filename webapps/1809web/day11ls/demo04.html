@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div{
+		width: 2000px;
+		height: 2000px;
+		background-color: red;
+	}
+	img{
+		position: absolute;
+	}
+</style>
+<script type="text/javascript">
+	function downfn(){
+		//event事件对象
+		var x = event.clientX;
+		var y = event.clientY;
+		console.log("鼠标按下x="+x+" y="+y);
+		var img = document.createElement("img");
+		img.src = "../imgs/2.gif";
+		img.style.left = x+"px";
+		img.style.top = y+"px";
+		document.body.appendChild(img);
+	}
+	function movefn(){
+		//console.log("鼠标移动"); 
+	}
+</script> 
+</head>
+<body>
+<div onmousedown="downfn()" 
+	onmouseup="console.log('鼠标抬起')"
+	onmousemove="movefn()">div</div> 
+</body>
+</html>
+
+
+
+

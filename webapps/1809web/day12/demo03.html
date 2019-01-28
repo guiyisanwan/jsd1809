@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>$()函数的使用</h1>
+<div id="msg"></div>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+//
+//console.log("hello world!");
+$(function(){
+	console.log("Hello World!")
+	
+});//加在完页面后执行
+console.log("hello world!");//边加载边执行,即移家在就执行
+$(function(){
+	//利用$()函数将字符串转换为jquery对象
+	var span=$("<span>test</span>");
+	$("#msg").append(span);//$("#msg")为jquery对象,添加的也必须是jquery对象
+})//$("#msg")数组的子元素为dom对象
+</script>
+</body>
+</html>

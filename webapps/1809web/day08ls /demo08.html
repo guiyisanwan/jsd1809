@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.red{
+		width: 100px;
+		height: 100px;
+		background-color: red;
+	}
+	.blue{
+		width: 100px;
+		height: 100px;
+		background-color: blue;
+	}
+</style>
+<script type="text/javascript">
+	function addfn(color){
+		var div = "<div class='color'></div>";
+		//替换class的值
+		div = div.replace("color",color);
+		//把替换好的html内容添加到d1里面
+		d1.innerHTML+= div;
+	}
+	
+</script>
+</head>
+<body>
+<input type="button" value="红" 
+onclick="addfn('red')">
+<input type="button" value="蓝" 
+onclick="addfn('blue')"> 
+<div id="d1"></div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div,img{
+		width: 200px;
+		height: 150px;
+	}
+	img{
+		display: none;
+	}
+</style>
+<script type="text/javascript">
+	onload = function(){
+		var arr = 
+			document.getElementsByTagName("img");
+		arr[0].style.display="block";
+	}
+
+	var count=1;
+	setInterval(function(){
+		//0 1 2 0 
+		var visibleIndex = count++%3;
+		//console.log(visibleIndex);
+		var arr = 
+			document.getElementsByTagName("img");
+		for(var i=0;i<arr.length;i++){
+			
+			if(i==visibleIndex){//显示
+				arr[i].style.display="block";
+			}else{//隐藏
+				arr[i].style.display="none";
+			}
+		}
+		
+		
+	},1000);
+</script>
+</head>
+<body>
+<div>
+	<img src="../imgs/1.jpg">
+	<img src="../imgs/a.jpg">
+	<img src="../imgs/k.jpg">
+</div>
+</body>
+</html>

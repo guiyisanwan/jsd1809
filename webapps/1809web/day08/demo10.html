@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.ok{
+color: green;
+}
+.err{
+color: red;
+}
+</style>
+<script type="text/javascript">
+ 	function checkfn(){
+ 		var reg=/^\w{6,10}$/;
+ 		/*if (i1.value.match(reg)){
+ 			s1.className="ok"
+ 		}else{
+ 			s1.className="err"
+ 		}
+ 		if (i2.value.match(reg)){
+ 			s2.className="ok"
+ 		}else{
+ 			s2.className="err"
+ 		}*/
+ 		if (reg.test(i1.value)){
+ 			s1.className="ok"
+ 		}else{
+ 			s1.className="err"
+ 		}
+ 		if (reg.test(i2.value)){
+ 			s2.className="ok"
+ 		}else{
+ 			s2.className="err"
+ 		}
+ 		/*if (reg.test(i1.value)){
+ 			s1.className="ok"
+ 		}else{
+ 			s1.className="err"
+ 		}
+ 	}*/
+ 	
+</script>
+</head>
+<body>
+  用户名:<input type="text" id="i1" placeholder="请输入用户名">
+  <span id="s1">6-10位数字下划先组成</span><br>
+  密码:<input type="password" id="i2" placeholder="请输入密码">
+  <span id="s2">6-10位数字下划先组成</span><br>
+   <input type="button" id="i3" value="校验" onclick="checkfn()">
+</body>
+</html>
+
+
+

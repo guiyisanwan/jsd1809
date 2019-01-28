@@ -1,0 +1,89 @@
+###超链接 a
+- 可以实现文本超链接和图片超链接
+- 如果不加href属性 则就是纯文本
+- href：资源路径 可以指向页面 可也以指向资源文件（能浏览则浏览不能浏览则下载）
+- target:_blank   在空白页显示新页面
+- 锚点的使用： 需要先创建一个空白的锚  然后通过另外一个a标签跳转
+	
+	<a id="top"></a> //锚
+	<a href="#top">回到顶部</a>
+###表格标签table
+- table  tr   td
+- table属性： border边框粗细单位是px像素 ， cellspacing:单元格的间距和单元格与边框的间距， cellpadding：单元格与内容的距离 
+- td属性： rowspan跨行   colspan跨列 
+- caption标签  标题   <th> 表头 内容加粗
+- 分组标签：<thead> <tbody> <tfoot> 没有显示效果 作用和div类似
+###表单 form
+- 用于获取用户的数据，提交到服务器
+- 学习form表单主要学习如何使用表单中的各种控件：文本框、密码框、提交按钮、单选、多选、下拉选、日期选择器、文件选择器、文本域等
+
+		<!-- action:提交地址 
+		method提交方式：get（默认）将请求参数放在请求地址的后面、
+		post是将请求参数放在请求体里面 -->
+		<form action="http://www.tmooc.cn" 
+			method="get">
+			<!-- placeholder：占位文本
+			name:作为传递参数的key，
+			必须写 不写则不会传递该参数 
+			value:设置初始默认值
+			maxlength:设置最大长度
+			readonly:只读
+			-->
+			用户名：<input type="text" 
+				placeholder="请输入用户名" 
+				name="username"
+				value="abc"
+				maxlength="5"
+				readonly="readonly"><br>
+			密码：<input type="password" 
+					name="password"
+					placeholder="请输入密码"><br> 
+			性别：<input type="radio" name="gender"
+			 value="nan" id="nan"> 
+			<label for="nan">男</label>  
+			<!-- checked 默认选中 -->
+			<input type="radio" name="gender" 
+			value="nv" id="nv" checked="checked"><label for="nv">女</label>
+			
+			<br>兴趣爱好：
+			<input type="checkbox" name="hobby" value="lq">打篮球
+			<input type="checkbox" name="hobby" value="code" checked="checked">撸代码
+			<input type="checkbox" name="hobby" value="wz">王者农药
+			<!-- 日期选择器 -->
+			<br>生日：<input type="date" name="birthday">
+			<!-- 文件选择器 -->
+		 	<br>靓照：<input type="file" name="pic">
+		 	<!-- 下拉选 -->
+		 	<br>所在城市：
+		 		<select name="city">
+		 			<option>请选择</option>
+		 			<option value="bj" 
+		 				selected="selected">北京</option>
+		 			<option value="sh">上海</option>
+		 			<option value="gz">广州</option>
+		 		</select>
+		 		<!-- 文本域 -->
+		 	<br>个人简介：
+		 	<textarea rows="3" cols="20" name="intro">这家伙很懒，什么都没留下。。。</textarea>
+		 	<!-- 隐藏域 当需要给服务器传递
+		 		某些不需要给用户展示的信息时使用 -->
+		 	<input type="hidden" name="xxx" value="yyy">
+			<br><input type="submit" value="注册">
+			<input type="reset" value="重写">  
+			<input type="button" value="自定义按钮"> 
+		</form>
+
+###CSS
+- Casecading Style Sheet： 层叠样式表 用于美化页面。
+####如何在html页面中引入css
+1. 内联样式：在标签内部的style属性中写样式代码，弊端：不能多标签复用
+2. 内部样式：在head标签内部添加 style标签 在标签体内写样式代码， 好处可以当前页面多个元素复用样式，弊端：不能多页面复用
+3. 外部样式：写在单独的css文件中
+
+
+
+
+
+
+
+

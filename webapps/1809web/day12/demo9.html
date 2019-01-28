@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.item{
+border: 1px solid red;
+width: 100px;
+height: px;
+}
+.sup{
+border: 1px solid red;
+width: 200px;
+}
+</style>
+</head>
+<body>
+<h1>属性选择器</h1>
+<h2>注册</h2>
+<form action="">
+<div>
+<label>电话:</label>
+<input id="mobile" type="text"><br>
+<span></span>
+<label>密码:</label>
+<input id="password" type="password"><br>
+<label>确认密码:</label>
+<input id="password" type="password">
+<span></span>
+<label>角色:</label>
+<input id="admin" type="checkbox" value="100" name="role">
+<label>管理员:</label>
+<input id="admin01" type="checkbox" value="200" name="role">
+<label>男宿管理员:</label>
+<input id="admin02" type="checkbox" value="300" name="role">
+<label>群众:</label>
+
+<span></span>
+</div>
+<div>
+  <input type="submit" value="注册">
+</div>
+</form>
+
+</body>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("input[type='submit']").val("开始注册");
+	$("form div:first-child").css("background_color","#eee");
+	$('form div:last-child').css('background_color','#000');
+	
+})
+</script>
+</body>
+</html>

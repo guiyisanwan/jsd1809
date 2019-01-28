@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	onload = function(){
+		showtime();
+	}
+	function showtime(){
+		//得到当前系统时间
+		var d = new Date();
+		//提取时分秒
+		var timeStr = d.toLocaleTimeString();
+		//显示到h1中
+		myh1.innerHTML = timeStr;
+	}
+	setInterval(showtime,1000);
+	/* 只执行一次的定时器 */
+	setTimeout(function(){
+		alert("我只出现一次");
+	},3000);
+	
+</script>
+</head>
+<body>
+<!-- 实现一个电子时钟  -->
+<h1 id="myh1"></h1>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>JQuery 内容选择</h1>
+	<div>
+		<h2>Java课程内容</h2>
+		<ul>
+			<li>Java基础</li>
+			<li>Java核心API</li>
+			<li></li>
+			<li>MySQL<a href="#">数据库</a></li>
+			<li><a href="#">JDBC</a></li>
+		</ul>
+	</div>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//根据内容选择
+	$('li:contains("Java")').append("OK");
+	//找到空的li 在里面写上"web前端"
+	$('li:empty').html("Web前端");
+	//找到包含a元素的li，在尾部追加 “a”
+	$('li:has(a)').append('a');
+});
+</script>
+</body>
+</html>
+
+
+

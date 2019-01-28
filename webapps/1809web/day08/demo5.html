@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+ 	function myfn1(){
+ 		var i=document.getElementById("i1");
+ 		var j=document.getElementById("i2");
+ 		var div = document.getElementById("d1");
+ 		//判断输入的内容是佛是NaN
+ 		if(isNaN(i.value)||isNaN(j.value)){
+ 			div.innerHTML="输入错误";
+ 			return;
+ 		}
+ 		div.innerHTML=parseFloat(i.value)+parseFloat(j.value);
+ 	}
+ 	function myfn2(){
+ 		var i=document.getElementById("i1");
+ 		var j=document.getElementById("i2");
+ 		var div = document.getElementById("d1");
+ 		//判断输入的内容是佛是NaN
+ 		if(isNaN(i.value)||isNaN(j.value)){
+ 			div.innerHTML="输入错误";
+ 			return;
+ 		}
+ 		div.innerHTML=i.value-j.value;
+ 	}
+ 	function myfn3(){
+ 		var i=document.getElementById("i1");
+ 		var j=document.getElementById("i2");
+ 		var div = document.getElementById("d1");
+ 		//判断输入的内容是佛是NaN
+ 		if(isNaN(i.value)||isNaN(j.value)){
+ 			div.innerHTML="输入错误";
+ 			return;
+ 		}
+ 		div.innerHTML=parseFloat(i.value)*parseFloat(j.value);
+ 	}
+ 	function myfn4(){
+ 		var i=document.getElementById("i1");
+ 		var j=document.getElementById("i2");
+ 		var div = document.getElementById("d1");
+ 		//判断输入的内容是佛是NaN
+ 		if(isNaN(i.value)||isNaN(j.value)){
+ 			div.innerHTML="输入错误";
+ 			return;
+ 		}
+ 		div.innerHTML=parseFloat(i.value)/parseFloat(j.value);
+ 	}
+</script>
+</head>
+<body>
+  <input type="text" id="i1" value="3">
+   <input type="text" id="i2" value="2">
+   <input type="button" id="i3" value="+" onclick="myfn1()">
+   <input type="button" id="i4" value="-" onclick="myfn2()">
+   <input type="button" id="i3" value="*" onclick="myfn3()">
+   <input type="button" id="i4" value="/" onclick="myfn4()">
+  <div id="d1"></div>
+</body>
+</html>
+
+
+

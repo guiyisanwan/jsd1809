@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#menu{
+	width: 100px;
+}
+.sub{
+	background-color: #eee;
+}
+.item{
+	background-color: #ddd;
+}
+</style>
+</head>
+<body>
+	<h1>选择显示、隐藏的元素</h1>
+	<div id="menu">
+		<div class="item">Java基础</div>
+		<div class="sub">
+			变量，数据类型
+			流程控制，面向对象
+		</div>
+		<div class="item">Java 核心API</div>
+		<div class="sub">
+			String, Object, 集合, Thread, IO, 
+			Stream, Network
+		</div>
+	</div>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//监听鼠标悬停事件
+	$('#menu > .item').mouseover(function(){
+		//console.log('Over');
+		//.hide() 通过设置内联样式，隐藏元素
+		$('#menu > .sub:visible').hide(500);
+		//this 代表响应“当前”事件的dom元素 
+		$(this).next().show(500);
+	});
+});
+</script>
+</body>
+</html>
+
+
+

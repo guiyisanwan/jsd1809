@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+input{
+border: 1px solid red;
+}
+</style>
+</head>
+<body>
+	<input type="text" id="i1">
+<input type="button" value="添加"  id="i2">
+<input type="button" value="插入" id="i3">
+<input type="button" value="删除" id="i4">
+<hr>
+<ul id="myul">
+	<li>北京</li>
+	<li id="sh">上海</li>
+	<li>广州</li>
+</ul>
+	
+<script type="text/javascript" 
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#i2").click(function(){
+var li1=$("<li></li>");
+li1.html($("#i1").val());
+//$("#myul").append(li1);
+$("#myul").prepend(li1);
+	});
+$("#i3").click(function(){
+	var li=$("<li></li>");
+	li.html($("#i1").val());
+	//$("li:contains('上海')").before(li);
+	$("li:contains('上海')").after(li);
+	});
+$("#i4").click(function(){
+	$("li:contains('上海')").remove();
+});
+});
+</script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+onload=function(){//加在完成时,发生的操作
+	var arr=document.getElementsByClassName("second_ul")//获取名为second_ul的元素数组
+	for (var i=0;i<arr.length;i++){//遍历数组中的每一个元素
+		arr[i].style.display="none";//给每个元素的样式中的显示元素副值为none
+	}
+	}//当加在完成后,让名为second_ul的ul元素全部不显示
+function myfu(li){//li为形参,点击li时发生的事件
+	//1.得到当前点击的ul
+	var ul=li.getElementsByTagName("ul")[0];//tag是标签的意思,0表示获取的是数组里的第一个元素
+	//2.得到所有ul
+	var arr=document.getElementsByClassName("second_ul")
+	for (var i=0;i<arr.length;i++){//获取数组中的每一个元素,并对每个元素作如下操作
+		if(arr[i]!=ul)//排除当前点击的ul
+		arr[i].style.display="none";//display是显示的意思
+	}//所有名为second_ul的元素中,除了当下点击的这个,其余全部成不显示状态
+	//alert(ul.nodeName)
+	//alert(ul.style.display);
+	if(ul.style.display=="none"){
+		ul.style.display="block"
+	}else{
+		ul.style.display="none";
+	}
+}
+
+</script>
+<style type="text/css">
+/*li>ul{
+display: none;
+}*/
+</style>
+</head>
+<body>
+<ul>
+	<li onclick="myfu(this)">同学<!-- 传入当前点击的元素 -->
+	       <ul class="second_ul">
+	          <li>刘德华</li>
+	          <li>老干妈</li>
+	          <li>凤姐</li>
+	       </ul>
+	
+	</li>
+<li onclick="myfu(this)">女友
+	       <ul class="second_ul">
+	          <li>美女1</li>
+	          <li>美女2</li>
+	          <li>美女3</li>
+	       </ul>
+	
+	</li>
+<li onclick="myfu(this)">亲戚
+	       <ul  class="second_ul">
+	          <li>张三</li>
+	          <li>李斯</li>
+	          <li>王五</li>
+	       </ul>
+	
+	</li>
+
+
+</ul>
+</body>
+</html>

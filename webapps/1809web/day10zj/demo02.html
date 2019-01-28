@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+}
+
+</style>
+<script type="text/javascript">
+var x=0;
+var onclick=function (){
+	x+=10;
+	myimg.style.marginLeft+=x+"px";
+	
+}
+setInterval(function(){
+	x+=10;
+	myimg.style.marginLeft=x+"px";
+	if(x>=300){
+		x=0
+	}
+},1000);
+</script>
+</head>
+<body>
+<div id="d1">这是一个div</div>
+<img id="myimg" src="../imgs/2.gif">
+</body>
+</html>

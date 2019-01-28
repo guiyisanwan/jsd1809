@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/* html{
+border: 5px solid black;
+} */
+#big{
+border:1px solid black;
+width:200px;
+height:200px;
+background-color: green;
+position: absolute;
+
+z-index:1 ;/*数字越大优先级高*/
+}
+
+#middle{
+position:absolute;
+border:1px solid black;
+width:100px;
+height:100px;
+background-color:red;
+margin-top: 10px;
+z-index:2 ;
+}
+#small{
+border:1px solid black;
+width:30px;
+height:30px;
+position:absolute;
+left:20px;
+top:20px;
+background-color:white;
+z-index:3 ;
+text-align: center;
+line-height: 30px;
+font-size: 1px;
+}
+</style>
+</head>
+<body>
+<div id="big">
+	
+</div>
+<div id="middle" >
+		
+	</div>
+	<div id="small">3d</div>
+</body>
+</html>

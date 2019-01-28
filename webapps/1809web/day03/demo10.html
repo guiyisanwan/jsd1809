@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#big{
+width: 200px;
+height: 200px;
+background-color: green;
+overflow: hidden;
+margin-bottom: 50;
+}
+#small{
+width: 50px;
+height: 50px;
+background-color: red;
+margin-left:50px;
+margin-top:50px ;/*当元素的上边缘和上级元素 ，占链*/
+}
+#d1{
+width: 100px;
+height: 100px;
+background-color: blue;
+}
+#s1{
+width: 10px;
+height: 10px;
+background-color: yellow;
+}
+#s2{
+width: 10px;
+height: 10px;
+background-color: green;
+}
+</style>
+</head>
+<body>
+<div id="big">
+   <div id="small"></div>
+</div>
+<div id="d1"></div>
+<span id="s1">啊啊</span><span id="s2">答道</span>
+</body>
+</html>

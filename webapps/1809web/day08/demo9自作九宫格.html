@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.red{/*元素中尚未取类名,将次类名副给某些元素,就能使这些元素获得此类的各个性质*/
+
+background-color: red;
+}
+.blue{
+background-color: blue;
+}
+#in{
+width:20px;
+height:20px;
+display: ;
+margin-bottom: 20px;
+}
+input{
+width: 100px;
+height: 100px;
+
+display: inline-block;
+}
+</style>
+<script type="text/javascript">
+ 	function checkfn(){
+ 		var x = document.getElementsByName("红");//如果您需要查找文档中的一个特定的元素，最有效的方法是 getElementById()。
+ 		alert(x.length);
+ 		for(i=0;i<x.length;i++){
+ 			x[i].setAttribute("class","red");
+ 		}
+ 		var y = document.getElementsByName("蓝");//如果您需要查找文档中的一个特定的元素，最有效的方法是 getElementById()。
+ 		alert(y.length);
+ 		for(i=0;i<y.length;i++){
+ 			y[i].setAttribute("class","blue");
+ 		}
+ 		//x.setAttribute("class","red");
+ 		 //div ="<div class="+color+"></div>";
+ 		//div=div.replace("color",color);
+ 		//d1.innerHTML+=div;
+ 	}
+ 		
+</script>
+</head>
+<body>
+  <button type="button" id="in"  onclick="checkfn()"></button>
+  <div id="big_top">
+   <input name="红"  >
+   <input name="蓝" >
+   <input name="红">
+ </div> 
+ <div name="big_center">
+   <input  name="蓝">
+   <input name="红">
+   <input  name="蓝">
+ </div> 
+ <div id="big_down">
+   <input name="红">
+   <input  name="蓝">
+   <input name="红">
+ </div> 
+</body>
+</html>
+
+
+

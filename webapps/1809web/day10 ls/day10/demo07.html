@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var arr = [["秦皇岛","唐山","保定"],
+	           ["太原","大同","吕梁"],
+	           ["武汉","襄阳","荆州"]];
+	//省份发生改变时执行此方法
+	function changefn(){
+		//清空内容
+		s2.innerHTML="<option>请选择</option>";
+		
+		//如果点击的是请选择 则什么都不做
+		if(isNaN(s1.value)){
+			return;
+		}
+		
+		
+		//得到选择省份对应的城市
+		var citys = arr[s1.value];
+		//遍历城市
+		for(var i=0;i<citys.length;i++){
+			var city = citys[i];
+			//创建option
+			var op = document.createElement("option");
+			op.innerHTML=city;
+			//添加到s2里面
+			s2.appendChild(op);
+		}
+	}
+</script>
+</head>
+<body>
+<select id="s1" onchange="changefn()">
+	<option>请选择</option>
+	<option value="0">河北</option>
+	<option value="1">山西</option>
+	<option value="2">湖北</option> 
+</select>
+<select id="s2">
+	<option>请选择</option>
+</select>
+</body>
+</html>
+
+

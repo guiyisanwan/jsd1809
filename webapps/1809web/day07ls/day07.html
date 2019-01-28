@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>day07</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>JavaScript（JS）</h1>
+<ul>
+<li>HTML： 组织内容</li>
+<li>CSS： 显示效果</li>
+<li>JavaScript: 页面中的动作效果</li>
+</ul>
+<h2>Java 和 JavaScript</h2>
+<p>Java和JavaScript只有4个字母一样！没有任何关系的两个语言！</p>
+<p>历史上 网景 公司推出脚本语言时候，为了蹭当时Java语言的热度，故意起名为JavaScript。</p>
+<p>JavaScript的API方法仿照了部分Java API设计。</p>
+<p>目前JavaScript是俗称，其官方标准名称 ES Script。</p>
+<h2>什么是Java Script</h2>
+<p>JavaScript是运行在浏览器中的脚本语言。 被浏览器事件驱动，可以访问浏览器提供了对象，在浏览器中编程控制浏览器中显示的页面效果。</p>
+<blockquote>
+<p>JS 可以在Node.js 环境中执行， 是服务端的JS</p>
+<p>脚本语言: 没有编译器，直接解释执行的语言称为脚本语言。</p>
+</blockquote>
+<h2>JavaScript Hello World！</h2>
+<ol>
+<li>HTML</li>
+<li>在网页中添加JS代码，处理事件</li>
+<li>在浏览器中显示HTML</li>
+<li>利用事件触发执行JS</li>
+</ol>
+<p>案例：</p>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div onclick=&quot;console.log('Hello World!')&quot;&gt;测试信息&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>JS 有3种嵌入方式</h2>
+<ol>
+<li>内联式： 直接写到HTML标签事件中，不推荐使用。 JS脚本和HTML混合，不利于软件的开发和维护。</li>
+<li>内部式： 使用 Script 标签声明，JS脚本在当前HTML有效。</li>
+<li>外部式： 使用 Script 标签引入js文件，用于多个HTML文件共享一个JS脚本文件。</li>
+</ol>
+<p>内部式JS 案例：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+//网页加载期间执行的 JS 脚本 
+console.log(&quot;Hello World&quot;);
+//声明一个JS函数（方法）
+function hello(){
+    console.log(&quot;Hello!&quot;); 
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;内部式JS&lt;/h1&gt;
+    &lt;div onclick=&quot;hello()&quot;&gt;演示&lt;/div&gt; 
+&lt;/body&gt;
+&lt;/html&gt; 
+</code></pre>
+
+<p>外部式：</p>
+<p><img src="1.png" /></p>
+<p>案例：</p>
+<ol>
+<li>
+<p>编写JS文件 js/hello.js：</p>
+<pre><code>function demo(){
+    console.log(&quot;demo&quot;);
+}
+</code></pre>
+
+</li>
+<li>
+<p>编写测试页面 jsdemo02.html</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;!-- script 只能单独加载外部JS脚本，
+不能在加载JS脚本的同时在内部声明JS脚本 --&gt;
+&lt;script type=&quot;text/javascript&quot; 
+    src=&quot;js/hello.js&quot;&gt;&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+//网页加载期间执行的 JS 脚本 
+console.log(&quot;Hello World&quot;);
+//声明一个JS函数（方法）
+function hello(){
+    console.log(&quot;Hello!&quot;); 
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;内部式JS&lt;/h1&gt;
+    &lt;div onclick=&quot;hello()&quot;&gt;演示&lt;/div&gt; 
+    &lt;h1&gt;外部式JS&lt;/h1&gt;
+    &lt;div onclick=&quot;demo()&quot;&gt;演示外部式JS&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+</li>
+</ol>
+<h2>JS 中声明变量</h2>
+<p>语法：</p>
+<pre><code>var 变量名; 
+</code></pre>
+
+<p>JS 的变量的语法很“自由”</p>
+<ol>
+<li>可以不声明使用！</li>
+<li>建议声明变量再使用，声明时候使用var。</li>
+<li>
+JS变量没有明确类型，赋值啥类型就是啥类型。
+<ul>
+<li>甚至可以改变类型赋值。</li>
+</ul>
+</li>
+<li>如果不初始化直接使用，其值是“未定义”。</li>
+</ol>
+<blockquote>
+<p>JS 有两种实验方式： Console实验，JS脚本实验</p>
+</blockquote>
+<p>案例：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+function test(){
+    var a = 5;
+    console.log(a);
+    b = 6; //JS可以不声明直接赋值使用！自动声明
+    console.log(b);
+    var c;
+    console.log(c);//未定义
+    c = 7;
+    console.log(c);
+    c = &quot;test&quot;; //变量可以更改类型赋值
+    console.log(c);
+
+    //?c存储的数据类型？
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;测试变量的声明&lt;/h1&gt;
+    &lt;p onclick=&quot;test()&quot;&gt;测试&lt;/p&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>检查变量中数据的类型</h2>
+<p>JS 中使用typeof()函数检查变量引用的数据的类型</p>
+<p>案例:</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+function test(){
+    var s = &quot;abc&quot;;
+    var c = 8;
+    var n = 3.14;
+    console.log(typeof(s));
+    console.log(typeof(c));
+    console.log(typeof(n));
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;测试变量引用数据的类型&lt;/h1&gt;
+    &lt;div onclick=&quot;test()&quot;&gt;测试&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>JS 中的数据类型</h2>
+<p><img src="2.png" /></p>
+<ol>
+<li>
+JS 中数据都是对象，对象分为几种
+<ul>
+<li>
+JS内嵌对象，也称为JS的内置对象， 或者JS的基本类型
+<ul>
+<li>number  string</li>
+</ul>
+</li>
+<li>
+由“宿主”环境提供的对象
+<ul>
+<li>window document</li>
+</ul>
+</li>
+<li>
+自定义对象
+<ul>
+<li>使用JS语法创建的对象</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+特殊值，特殊值用于表示没有变量没有引对象的情况
+<ul>
+<li>null</li>
+<li>未定义</li>
+</ul>
+</li>
+</ol>
+<h2>JS 内置对象</h2>
+<p>JS 内置对象，是JS本身内置的对象。 也称为JS的基本数据类型，与Java不同这些类型是对象！</p>
+<h3>number</h3>
+<p>JS中是对象，是浮点数，计算结果是浮点结果。 没有整数！！</p>
+<p>直接赋值为数的，都是number类型。 包含number类型方法。</p>
+<p>number类型包含方法：</p>
+<ul>
+<li>num.toFixed(2) 将num转换为字符串，保留两位小数。</li>
+</ul>
+<p>其它方法请参考对应的手册： <a href="http://doc.tedu.cn/w3/jsref/jsref_obj_number.html">http://doc.tedu.cn/w3/jsref/jsref<em>obj</em>number.html</a></p>
+<h3>string</h3>
+<p>任何JS字符串都是string类型。 JS string类型包含的API方法与Java String的方法类似。</p>
+<p>具体请参考： <a href="http://doc.tedu.cn/w3/jsref/jsref_obj_string.html">http://doc.tedu.cn/w3/jsref/jsref<em>obj</em>string.html</a></p>
+<p>案例：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+function test(){
+    var num = 3.1415926;
+    //Fixed 固定的，返回固定小数点位数
+    //输出价格等情况
+    console.log(num.toFixed(2));
+    console.log(num.toFixed(4));
+    var str = &quot;tedu.cn&quot;;
+    var n = str.indexOf(&quot;cn&quot;);
+    console.log(n);//5
+    var c = str.charAt(5);
+    console.log(c);//c
+    var b = str.blod();
+    console.log(b);
+} 
+//显示加粗的 文字
+function demo01(){
+    var str = &quot;测试&quot;;
+    var msg = str.bold();
+    //用id在document对象中找到 div元素 
+    var div=document.getElementById(&quot;msg&quot;);
+    //innerHTML 读写 div元素内部的内容
+    div.innerHTML=msg;
+}
+//显示红色的文字
+function demo02(){
+    var str = &quot;测试&quot;;
+    var msg = str.fontcolor(&quot;red&quot;);
+    //用id在document对象中找到 div元素 
+    var div=document.getElementById(&quot;msg&quot;);
+    //innerHTML 读写 div元素内部的内容
+    div.innerHTML=msg;  
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Number 和 String&lt;/h1&gt;
+    &lt;p onclick=&quot;test()&quot;&gt;测试&lt;/p&gt;
+    &lt;h1&gt;页面局部刷新&lt;/h1&gt;
+    &lt;div onclick=&quot;demo02()&quot; &gt;red&lt;/div&gt;
+    &lt;div id=&quot;msg&quot; onclick=&quot;demo01()&quot;&gt;Test&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3>boolean</h3>
+<p>Boolean 只有两个值 true, false</p>
+<h3>Date</h3>
+<p>Date 类型用于表示时间，其中封装了时间毫秒数。</p>
+<p>最重要方法： </p>
+<ul>
+<li>toLocaleString() 返回当前系统的时间字符串。</li>
+<li>getTime() 返回时间毫秒数</li>
+</ul>
+<p>案例：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+function test(){
+    //创建Date类型时候内部包含当前时间毫秒数
+    var d = new Date();
+    //获取时间毫秒数
+    var time = d.getTime();
+    //转换为本地时间字符串
+    var str = d.toLocaleString();
+    console.log(d);
+    console.log(time);
+    console.log(str);
+
+    var s = document.getElementById(&quot;msg&quot;);
+    s.innerHTML=str;
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Date类型&lt;/h1&gt;
+    &lt;div onclick=&quot;test()&quot;&gt;测试&lt;/div&gt;  
+    &lt;span id=&quot;msg&quot;&gt;&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3>Array</h3>
+<p>数组，JS中的数组与Java中的ArrayList基本一样，是长度可变的数据结构。 一个数组中可以存储多种数据类型的元素。</p>
+<ol>
+<li>
+<p>声明数组：</p>
+<pre><code>var arr = [];
+var ary = [1,2,3,4];
+</code></pre>
+
+</li>
+<li>
+<p>向数组追加元素：</p>
+<pre><code>arr.push(2,5);
+arr[arr.length] = 8;
+</code></pre>
+
+</li>
+<li>
+<p>向数组前面插入元素：</p>
+<pre><code>arr.unshift(8);
+</code></pre>
+
+</li>
+<li>
+<p>删除元素</p>
+<pre><code>arr.splice(2,2);//从位置2开始连续删除两个元素。
+</code></pre>
+
+</li>
+</ol>
+<p>测试案例：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+function test(){
+    var arr = []; //new Array()
+    arr.push(8,9); //在数组末尾追加元素
+    arr[arr.length]=10; //在数组末尾追加元素
+    arr[arr.length]=&quot;Hello&quot;;//在数组末尾追加元素
+    //在数组中删除元素，第一个参数是起始位置，
+    //第二个参数是位置
+    arr.splice(2,1); 
+    console.log(arr);
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Array测试&lt;/h1&gt;
+    &lt;div onclick=&quot;test()&quot;&gt;test&lt;/div&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3>特殊值</h3>
+<p>null： 表示变量没有引用任何对象。 </p>
+<p>undefined：变量声明以后，还没有初始化之前的不确定情况！</p>
+<p>无论是 null 还是 undefined 都表示有变量，无对象，此时调用属性或者方法将出现&quot;错误&quot;</p>
+<blockquote>
+<p>编程时候，表示“没有” 一般使用 null。</p>
+</blockquote>
+<h2>自动类型转换（隐式类型转换）</h2>
+<p>JS 发明之初是为了美工使用，就是为了方便使用。</p>
+<ol>
+<li>
+<p>数字自动转换为字符串；</p>
+<pre><code>var a1 = 56;
+var a2 = &quot;66&quot;;
+console.log(a1+a2); //&quot;5666&quot;
+</code></pre>
+
+</li>
+<li>
+<p>boolean 类型自动转换为数字，true 为 1， false 为 0</p>
+<pre><code>var a1 = 56;
+var b1 = true;
+var b2 = false;
+console.log(a1+b1);//57
+console.log(a1*b2);//0
+</code></pre>
+
+</li>
+<li>
+<p>0, &quot;&quot;， null，undefined，NaN 自动作为 false，反之为true</p>
+<pre><code>var n;
+if(n){
+    console.log(&quot;true&quot;);
+}else{
+    console.log(&quot;false&quot;);
+}
+</code></pre>
+
+</li>
+<li>
+<p>数字与 undefined 运算时候结果是 NaN</p>
+<ul>
+<li>NaN: Not a Number, 不是一个数！</li>
+</ul>
+</li>
+</ol>
+<p>案例：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+function test(){
+    var n; 
+    if(n){
+        console.log(&quot;true&quot;);
+    }else{
+        console.log(&quot;false&quot;);
+    }
+    n = 0;
+    if(n){
+        console.log(&quot;true&quot;);
+    }else{
+        console.log(&quot;false&quot;);
+    }
+    n = null;
+    if(n){
+        console.log(&quot;true&quot;);
+    }else{
+        console.log(&quot;false&quot;);
+    }
+    n = &quot;&quot;;
+    if(n){
+        console.log(&quot;true&quot;);
+    }else{
+        console.log(&quot;false&quot;);
+    }
+}
+
+function print(n){
+    if(n){
+        console.log(&quot;true&quot;);
+    }else{
+        console.log(&quot;false&quot;);
+    }
+}
+function test2(){
+    print(5);
+    print(&quot;abc&quot;);
+    print([1,2,3]);
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;特殊值作为false使用&lt;/h1&gt;
+    &lt;div onclick=&quot;test()&quot;&gt;测试&lt;/div&gt;
+    &lt;h1&gt;非&quot;空&quot;作为 true 使用&lt;/h1&gt;
+    &lt;div onclick=&quot;test2()&quot;&gt;测试&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>NaN案例：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+function test(){
+    var total;
+    // undefined 参与计算，结果为 NaN
+    // 如果计算结果为 NaN 则参数计算的数据有 undefined
+    var sum = total * 0.8;
+    console.log(sum);
+    //NaN 可以作为false
+    if(sum){
+        console.log(&quot;true&quot;);
+    }else{
+        console.log(&quot;false&quot;);
+    }
+}
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;NaN现象&lt;/h1&gt;
+    &lt;p onclick=&quot;test()&quot;&gt;Test&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3>运算符</h3>
+<p>运算符与 Java 基本相同。</p>
+<ol>
+<li>
+<p>JS中没有整数，除法是浮点除法，不整除。 利用parseInt函数实现取整数</p>
+<pre><code>7/2 得 3.5
+parseInt(7/2) 得到 3
+</code></pre>
+
+</li>
+<li>
+<p>== 不区别数据类型判断相等， === 称为“全等” 数据类型一样，数值一样</p>
+<pre><code>var a = 55;
+var b = 55;
+var c = '55';
+console.log(a==b); //true
+console.log(a==c); //true
+console.log(a===b);//true
+console.log(a===c);//false
+</code></pre>
+
+</li>
+<li>
+<p>!= 和 !== 自行实验</p>
+</li>
+</ol>
+<p>练习：</p>
+<ol>
+<li>
+利用Math.random() 生成一个1~100之间的随机数。作为半径计算圆面积。在页面的 span 元素中显示出来。 
+<ul>
+<li>要求： 在控制台和HTML文件两种方式实现。</li>
+</ul>
+</li>
+<li>编写案例，实验全部的知识点。</li>
+<li>
+创建一个数组，添加一组数据，找出其中最大的数据。
+<ul>
+<li>提示：JS 的for循环与Java一样</li>
+</ul>
+</li>
+<li>创建一个数组对数组元素进行冒泡排序。</li>
+</ol>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

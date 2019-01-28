@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>组选择器</h1>
+	<input type="button" id="test" value="测试">  
+	<div></div>
+	<p></p>
+	<span></span>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//click()事件绑定方法，可以在对象被点击
+	//时候执行事件方法
+	$("#test").click(function(){
+		//组选择器，选择了 div p 和span元素 
+		$("div,p,span").html("test");
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+

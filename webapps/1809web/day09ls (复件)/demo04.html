@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//创建一个空对象
+	function Person(){
+	}
+	var p = new Person();
+	//创建完对象后给对象添加属性
+	p.name="关羽";
+	p.age=18;
+	//给对象添加方法
+	p.run = function(){
+		alert("name:"+this.name+" age:"+this.age);
+	}
+	//调用方法
+	p.run();
+	/* 第二种创建对象的方式 */
+	var p2 = {
+			"name":"曹操",
+			"age":18,
+			"run":function(){
+				alert("name"+this.name
+						+" age:"+this.age);
+			}
+	}
+	//调用方法
+	p2.run();
+	
+	
+	
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

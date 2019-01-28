@@ -1,0 +1,254 @@
+###课程回顾
+1. 分组查询 group by
+- 每个部门的平均工资
+	select deptno,avg(sal) from emp group by deptno;
+2. having 用于和group by结合使用 后面写聚合函数的条件
+- 查询平均工资在2000以上的部门编号和平均工资
+	select deptno,avg(sal) a from emp group by deptno having a>2000;
+3. 子查询，把多条SQL查询语句合并成一条嵌套查询
+- 查询拿最高工资的员工信息
+	select * from emp where sal=(select max(sal) from emp);
+- 可写在三种地方
+	1. 写在where和having后面当做查询条件的值
+	2. 写在创建表的时候 
+		create table 表名 as (子查询);
+	3. 写在from后面当成一个虚拟表 必须起别名 
+4. 关联查询
+- 同时查询多张表的数据
+- 三种查询方式：
+	1. 等值连接： 查询两张表的交集数据， select * from A,B where A.x=B.x and A.age=18;
+	2. 内连接： 查询两张表的交集数据, select * from A join B on A.x=B.x where A.age=18;
+	3. 外连接:查询一张表的全部数据和另外一张表的交集数据
+	select * from A left/right join B on A.x=B.x where A.age=18;
+- 笛卡尔积：关联查询不写关联关系则会出现两张表数据的乘积，这种乘积称为笛卡尔积
+
+###作业
+ 1. 每个部门的人数,根据人数排序
+	select deptno,count(*) c from emp group by deptno
+	order by c;
+  2. 每个部门中，每个主管的手下人数
+	select deptno,mgr,count(*) from emp 
+	where mgr is not null group by deptno,mgr;
+  3. 每种工作的平均工资
+	select job,avg(sal) from emp group by job;
+  4. 每年的入职人数 
+	select extract(year from hiredate) y,count(*) from emp 
+	group by y;
+  5. 少于等于3个人的部门信息
+	select deptno from emp group by deptno having count(*)<=3;
+	select * from dept where deptno in(select deptno from emp group by deptno having count(*)<=3);
+	-考虑40号部门
+	select d.deptno
+	from emp e right join dept d
+	on e.deptno=d.deptno 
+	group by d.deptno
+	having count(e.ename)<=3;
+	
+	select * from dept where deptno in (上面一坨);
+  6. 拿最低工资的员工信息
+	select * from emp where sal=(select min(sal) from emp);
+  7. 只有一个下属的主管信息
+	select mgr from emp 
+	where mgr is not null group by mgr having count(*)=1;
+	
+	select * from emp where empno in (select mgr from emp 
+	where mgr is not null group by mgr having count(*)=1);
+  8. 平均工资最高的部门编号
+	select avg(sal) a from emp group by deptno order by a desc limit 0,1;
+	
+	select deptno from emp group by deptno having avg(sal)=(select avg(sal) a from emp group by deptno order by a desc limit 0,1);
+  9. 下属人数最多的人，查询其个人信息
+	- 得到最多的下属人数	
+	select count(*) from emp group by mgr order by count(*) desc limit 0,1;
+	- 通过人数找对应的mgr值
+	select mgr from emp group by mgr having count(*)=(select count(*) from emp group by mgr order by count(*) desc limit 0,1);
+	- 通过主管编号得到主管信息
+	select * from emp where empno in (上面一坨);
+
+  11. 最后入职的员工信息
+	select * from emp where hiredate=(select max(hiredate) from emp); 
+  12. 工资多于平均工资的员工信息
+	select * from emp where sal>(select avg(sal) from emp);
+  13. 查询员工信息，部门名称
+	select e.*,d.dname
+	from emp e join dept d
+	on e.deptno=d.deptno;
+  14. 员工信息，部门名称，所在城市
+      select e.*,d.dname,d.loc
+	from emp e join dept d
+	on e.deptno=d.deptno; 
+  15. DALLAS 市所有的员工信息
+	select e.*
+	from emp e join dept d
+	on e.deptno = d.deptno
+	where d.loc='dallas';	 
+  16. 按城市分组，计算每个城市的员工数量
+	select d.loc,count(e.ename)
+	from emp e right join dept d
+	on e.deptno=d.deptno
+	group by d.loc;
+  17. 查询员工信息和他的主管姓名
+- 自关联的查询方式： 把一张表当成两张表 通过内连接把两个表连接起来查询
+	select e.ename,m.ename
+	from emp e left join emp m
+	on e.mgr=m.empno;
+
+  18. 员工信息，员工主管名字，部门名
+	 select e.ename,m.ename,d.dname
+	from emp e left join emp m
+	on e.mgr=m.empno
+	join dept d
+	on e.deptno=d.deptno;
+
+  20. 员工和他所在部门名
+	select e.ename,d.dname
+	from emp e join dept d
+	on e.deptno=d.deptno;	
+  22. 案例：查询emp表中所有员工的姓名以及该员工上级领导的编号，姓名，职位，工资
+	select e.ename,m.empno,m.ename,m.job,m.sal
+	from emp e left join emp m
+	on e.mgr=m.empno;
+  23. 案例：查询emp表中名字中没有字母'K'的所有员工的编号，姓名，职位以及所在部门的编号，名称，地址
+	select e.empno,e.ename,e.job,d.*
+	from emp e join dept d
+	on e.deptno=d.deptno
+	where e.ename not like '%k%';	
+
+  24. 案例：查询dept表中所有的部门的所有的信息，以及与之关联的emp表中员工的编号，姓名，职位，工资
+	select d.*,e.empno,e.ename,e.job,e.sal
+	from emp e right join dept d
+	on e.deptno=d.deptno;
+
+###表设计之关联关系
+###一对一
+- 什么是一对一：有AB两张表，A表中的一条数据保存B表中的一条数据，同时B表一条数据也对应A表的一条数据，这两张表的关系称为一对一。
+- 应用场景：  用户表和用户信息扩展表， 商品表和商品信息扩展表
+- 如何建立关系：在主表中添加主键，从表中添加外键指向主表的主键
+
+- 练习： 创建用户表user(id,username,password) 和 用户信息扩展表userinfo(userid,nick,qq)保存以下数据
+- 创建表：
+	create table user(id int primary key auto_increment,username varchar(10),password varchar(10));
+	create table userinfo(userid int,nick varchar(10),qq varchar(15));
+	用户名 密码       昵称      qq
+	libai admin      诗仙     112233
+	liubei admin      刘皇叔  558866
+	diaochan 123456   貂蝉    554433
+- 插入数据
+	insert into user (username,password) values ('libai','admin'),('liubei','admin'),('diaochan','123456');
+	insert into userinfo values(1,'诗仙','112233'),(2,'刘皇叔',558866),(3,'貂蝉',554433);
+1. 查询每个用户的用户名、昵称、qq
+	select u.username,ui.nick,ui.qq
+	from user u join userinfo ui
+	on u.id=ui.userid;
+2. 查询诗仙的用户名和密码
+	select u.username,u.password
+	from user u join userinfo ui
+	on u.id=ui.userid where ui.nick='诗仙';
+3. 查询diaochan的所有信息
+	select *
+	from user u join userinfo ui
+	on u.id=ui.userid where u.username='diaochan';
+###一对多
+- 什么是一对多：有AB两张表：A表中的一条数据对应B表中的多条数据，同时B表中的一条数据对应A表中的一条。
+- 应用场景： 员工表和部门表  商品表和商品分类表
+- 如何建立关系：  在多的表中添加外键指向另外一张表的主键
+- 练习： 创建员工表t_emp(id,name,deptid)和部门表t_dept(id,name)
+	create table t_emp(id int primary key auto_increment,name varchar(10),deptid int);
+	create table t_dept(id int primary key auto_increment,name varchar(10));
+保存以下数据：
+	神仙部的猪八戒和孙悟空
+	妖怪部的蜘蛛精和白骨精
+	insert into t_dept values(null,'神仙部'),(null,'妖怪部');
+	insert into t_emp (name,deptid) values('悟空',1),('八戒',1),('蜘蛛精',2),('白骨精',2);
+1. 查询每个部门对应的员工姓名
+	select d.name,e.name
+	from t_emp e join t_dept d
+	on e.deptid=d.id;
+2. 查询八戒的部门名称
+	select d.name
+	from t_emp e join t_dept d
+	on e.deptid=d.id where e.name='八戒';
+3. 查询妖怪部的员工姓名
+	select e.name
+	from t_emp e join t_dept d
+	on e.deptid=d.id where d.name='妖怪部';
+###多对多
+- 什么是多对多：有AB两张表，A表中一条数据对应B表的多条数据，同时B 表的一条数据对应A表的多条数据，称为多对多。
+- 应用场景:  学生表和老师表     用户和角色表  
+- 如何建立关系：创建一个关系表在关系表中有两个外键分别指向两个表的主键
+- 练习：创建学生表student(id,name)和老师表teacher(id,name) 和学生老师关系表s_t(sid,tid)
+	create table student(id int primary key auto_increment,name varchar(10));
+	create table teacher(id int primary key auto_increment,name varchar(10));
+	create table s_t(sid int,tid int);
+- 添加以下数据：
+	苍老师：小明，小红，小黄	
+	传奇老师：小绿，小明	
+	insert into student values(null,'小明'),(null,'小红'),(null,'小黄'),(null,'小绿');
+	insert into teacher values(null,'苍老师'),(null,'传奇老师');
+	insert into s_t values(1,1),(1,2),(2,1),(3,1),(4,2);
+1. 查询每个老师姓名和对应的学生姓名
+	select t.name,s.name
+	from student s join s_t st
+	on s.id=st.sid
+	join teacher t
+	on t.id=st.tid;
+2. 查询苍老师的学生都有谁
+	select s.name
+	from student s join s_t st
+	on s.id=st.sid
+	join teacher t
+	on t.id=st.tid where t.name='苍老师';
+3. 查询小明的老师都有谁 
+	select t.name
+	from student s join s_t st
+	on s.id=st.sid
+	join teacher t
+	on t.id=st.tid where s.name='小明';
+###表设计案例： 权限管理
+- 三张主表： 用户表 角色表 权限表    两张关系表：用户角色关系表，角色权限关系表
+	create database db5 character set utf8;
+1. 创建表： user(id,name)    role(id,name)  module(id,name)
+	u_r(uid,rid)    r_m(rid,mid)
+
+	create table user(id int primary key auto_increment,name varchar(10));
+	create table role(id int primary key auto_increment,name varchar(10));
+	create table module(id int primary key auto_increment,name varchar(10));
+	create table u_r(uid int,rid int);
+	create table r_m(rid int,mid int);
+
+2. 保存以下数据： 用户（苍老师，小明，克晶老师） 角色（男游客，男管理员，女会员，女管理员） 权限（男浏览，男发帖，男删帖，女浏览，女发帖，女删帖）
+	insert into user values(null,'苍老师'),(null,'小明'),(null,'克晶老师');
+	insert into role values(null,'男游客'),(null,'男管理员'),(null,'女会员'),(null,'女管理员');
+	insert into module values(null,'男浏览'),(null,'男发帖'),(null,'男删帖'),(null,'女浏览'),(null,'女发帖'),(null,'女删帖');
+关系：苍老师(男管理员，女管理员) 小明（女会员）克晶老师（女管理员，男游客） 男游客（男浏览）， 男管理员（男浏览，男发帖，男删帖），女会员（女浏览，女发帖），女管理员（女浏览，女发帖，女删帖）
+	insert into u_r values(1,2),(1,4),(2,3),(3,4),(3,1);
+	insert into r_m values(1,1),(2,1),(2,2),(2,3),(3,4),(3,5),(4,4),(4,5),(4,6);
+- 查询每个用户对应的所有权限
+	select u.name,m.name
+	from user u join u_r ur
+	on u.id=ur.uid
+	join r_m rm
+	on ur.rid=rm.rid
+	join module m
+	on m.id=rm.mid  order by u.name;
+- 查询苍老师的权限都有什么
+	select m.name
+	from user u join u_r ur
+	on u.id=ur.uid
+	join r_m rm
+	on ur.rid=rm.rid
+	join module m
+	on m.id=rm.mid  where u.name='苍老师';
+- 有男浏览权限的用户都有谁
+	select u.name
+	from user u join u_r ur
+	on u.id=ur.uid
+	join r_m rm
+	on ur.rid=rm.rid
+	join module m
+	on m.id=rm.mid  where m.name='男浏览';
+
+
+	
+
+

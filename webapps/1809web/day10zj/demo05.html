@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+input{
+
+}
+</style>
+<script type="text/javascript">
+function add(){
+var li=	document.createElement("li")
+//document.body.appendChild(li)
+//li.innerHTML=i1.value;
+//myul.appendChild(li);
+myul.innerHTML+="<li>"+i1.value+"</li>"//加不加+有区别
+}
+function insert(){
+	var li=	document.createElement("li")
+	li.innerHTML=i1.value;//文本宽内输入的内容
+	myul.insertBefore(li,sh)
+}
+function deletle(){
+	myul.removeChild(sh);
+}
+</script>
+</head>
+<body>
+<input type="text" id="i1">
+<input type="button" value="添加" onclick="add()">
+<input type="button" value="插入" onclick="insert()">
+<input type="button" value="删除" onclick="deletle()">
+<ul id="myul">
+<li>北京</li>
+<li id="sh">上海</li>
+<li>广州</li>
+</ul>
+</body>
+</html>

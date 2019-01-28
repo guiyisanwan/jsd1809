@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	span {
+	/* 控制元素隐藏和显示  hidden隐藏 visible显示 */
+	visibility: hidden;
+	color: red;
+}
+</style>
+<script type="text/javascript">
+	function checkUsername(){
+		//alert("开始检查用户名"); 
+		var reg = /^\w{6,10}$/;
+		//判断用户输入的用户名是否正确
+		if(reg.test(i1.value)){
+			//隐藏s1的文本 修改元素的样式 
+			s1.style.visibility="hidden";
+			return true;
+		}else{
+			//显示s1的文本
+			s1.style.visibility="visible";
+			return false;
+		}
+	}
+	function checkPassword(){
+		//alert("开始检查用户名"); 
+		var reg = /^\w{6,10}$/;
+		//判断用户输入的用户名是否正确
+		if(reg.test(i2.value)){
+			//隐藏s1的文本 修改元素的样式 
+			s2.style.visibility="hidden";
+			return true;
+		}else{
+			//显示s1的文本
+			s2.style.visibility="visible";
+			return false;
+		}
+	}
+</script>
+</head>
+
+<body>
+<form action="http://doc.tedu.cn" ><!--只有return后为true,页面才会跳转-->
+	onsubmit="return checkUsername()+checkPassword()==2;">
+	<input type="text" placeholder="用户名"
+		onblur="checkUsername()" id="i1" 
+			name="username">
+	<span id="s1" >格式错误</span><br>
+	<input type="password" placeholder="密码" 
+		id="i2" name="password" 
+		onblur="checkPassword()">
+	<span id="s2">格式错误</span><br>
+	<input type="submit" value="登录"> 
+</form> 
+
+<a href="http://www.tmooc.cn"  
+	onclick="return confirm('您确认离开吗？');">
+	TMOOC</a>
+
+</body>
+</html>
+
+
+

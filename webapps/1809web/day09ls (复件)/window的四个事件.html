@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/* 窗口点击事件 */
+	onclick = function(){
+		//alert("点击了");
+	}
+	
+	//alert("aaa");
+	/* 页面加载完成事件 */
+	onload = function(){
+		//alert("加载完成了");
+		i1.value="xxx";
+		//如果页面初始化时要对页面中的元素进行修改，
+		//一定要把修改代码写在onload里面
+	}
+	//alert("bbb"); 
+	
+	/* 获取焦点 */
+	onfocus = function(){
+		console.log("获取焦点");
+	}
+	/* 失去焦点 */
+	onblur = function(){
+		console.log("失去焦点"); 
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="i1">
+</body>
+</html>
+
+
+

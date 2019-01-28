@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/*控制元素隐藏和显示*/
+span{
+visibility:hidden;
+color: red;
+}
+	
+}
+</style>
+<script type="text/javascript">
+function checkUsername(){
+//	alert("sssss")
+	reg=/^\w{6,10}$/;
+	if(reg.test(i1.value)){
+		s1.style.visibility="hidden";
+		return true;
+	}else{
+		s1.style.visibility="visible";
+		return false;
+	}
+	}
+	function checkpassword(){
+//		alert("sssss")
+		reg=/^\w{6,10}$/;
+		if(reg.test(i2.value)){
+			s2.style.visibility="hidden";
+			return true;
+		}else{
+			s2.style.visibility="visible";
+			return false;
+		}
+	}
+	
+
+</script>
+</head>
+<body>
+<form action="http://doc.tedu.cn" onsubmit="return checkUsername()+checkpassword()==2 ">
+<input id="i1" type="Username" placeholder="用户名"  onblur="checkUsername()">
+<span id="s1">格式错误</span><br>
+<input  id="i2" type="password" placeholder="密码"  onblur="checkpassword()">
+<span id="s2">格式错误</span><br>
+<input type="submit" value="登录">
+</form>
+<a href="http://www.tmooc.cn" onclick="return confirm('您确定离开码?')">TMOOC</a>
+</body>
+</html>

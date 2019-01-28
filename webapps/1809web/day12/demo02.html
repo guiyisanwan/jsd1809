@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>认识JQuery对象</h1>
+<p>JQuery对象扩转于JS Aarry</p>
+<div class="demo">A</div>
+<div class="demo">B</div>
+<div class="demo">C</div>
+<div class="demo">D</div>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+var obj=$('.demo');//$('.demo')是jquery对象
+console.log(obj);//每个数组元素是一个dom<div>对象
+console.log(obj[0]);
+console.log(obj[1]);
+console.log(obj[2]);
+console.log(obj[3]);
+obj.html('demo');//obj是jquery对象
+$('.demo')[1].innerHTML="lius";//$('.demo')[1]是dom对象
+$($('.demo')[1]).html("哈哈");//$($('.demo')[1])是jquery对象
+$($($('.demo')[1]))[0].innerHTML="lius";//$($($('.demo')[1]))[0]是dom对象
+arr=["tom","jray","jim"];
+arr.test=function(){
+	console.log("hello")
+	}
+	arr.test();
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- script只能单独加在外部JS,不能同时加在JS脚本的同时在内部声明js脚本 -->
+<script type="text/javascript"
+src="js/hello.js">
+</script>
+<script type="text/javascript">
+//网络加在期间执行的JS脚本
+//console.log("Hello World");
+//声明一个JS函数
+function hello(){
+	console.log("Hello!");
+	
+}
+</script>
+</head>
+<body>
+<h1>内部式JS</h1>
+<div onclick="hello()">演示</div>
+<div onclick="demo()">演示外部式JS</div>
+<div></div>
+</body>
+</html>

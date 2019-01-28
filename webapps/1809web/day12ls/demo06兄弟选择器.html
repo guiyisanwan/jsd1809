@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.error{
+	color: red;
+}
+</style>
+</head>
+<body>
+	<h1>兄弟选择器</h1>
+	<h2>注册</h2>
+	<form action="">
+		<div>
+			<label>用户名</label>
+			<input id="username" name="username">
+			<span></span>
+		</div>
+	</form>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//blur() 用于绑定失去焦点事件，当输入控件
+	//失去焦点时候，会执行事件方法
+	$('#username').blur(function(){
+		console.log("blur");
+		//1. 获取输入框数据
+		//val() 必须在表单项上调用，获取标签中的值
+		var val = $('#username').val();
+		//2. 检查数据格式
+		if(! val){ //如果没有值就显示错误消息
+			//3. 如果检查失败 就 在span中显示失败消息
+			$('#username + span').addClass('error')
+		                     .html('错了！');
+			//next() 获取当前元素的后一个节点
+			//$('#username').next() 
+			//prev() 获取当前元素的前一个兄弟节点
+			$('#username').prev().addClass('error');
+			//几乎所有的JQueryAPI方法返回的都是JQuery
+			//对象，这时可以连续调用JQuery对象提供的
+			//API方法。
+		}else{
+			//empty()清空span元素的内容
+			$('#username').next().empty();
+			//清除 label 上的error红色
+			$('#username').prev()
+				.removeClass('error');
+		}
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div,p,input{
+		border: 1px solid red;
+	}
+</style>
+<script type="text/javascript">
+	function myfn(){
+		var obj = event.target||event.srcElement;
+		alert(obj.nodeName);//输出元素名
+		d1.innerHTML=obj.nodeName;//nodeName返回元素的名称。
+		//d1.innerHTML=this.nodeName;只有在動態綁定中,this表示事件源表千,此處爲靜態綁定
+	}//幫定指,表千與事件的幫定,div.onclick=function(){},此爲js中的幫定,爲動態綁定
+	
+</script>
+</head>
+<body>
+<div onclick="myfn()">
+	<p>
+		<input type="button" value="按钮">  
+	</p>
+</div>
+<div id="d1"></div>
+<!-- <div onclick="alert('div事件')">
+	<p onclick="alert('P事件')">
+		<input type="button" value="按钮"
+		onclick="alert('按钮事件')">  
+	</p>
+</div> -->
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("input").click(function(){
+			alert("试试就试试！");
+		})
+	})
+	setTimeout(function(){
+		//触发元素的点击事件
+		$("input").trigger("click");
+	},3000);
+</script>
+</head>
+<body>
+<input type="button" value="点我试试"> 
+
+</body>
+</html>
+
+
+

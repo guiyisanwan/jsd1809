@@ -1,0 +1,2463 @@
+  mysql -uroot -p;
+  use db2;
+   create table student(name varchar(10),age int,chinese int,math int,english int);
+  show tables;
+  show create table student;
+  create table t1(name varchar(10),age int)engine=myisam charset=gbk;
+  show create table t1;
+  desc student;查看表字段
+  drop table student;
+  show tables;
+  create database db4 character set utf8;
+  use db4;
+  create table t1(name varchar(10),age int);
+  create table t2(name varchar(10),age int)engine=myisam charset=gbk;
+  show tables;
+  show create table t1;
+  desc t1;
+  show  create table t2;
+  desc t2;
+  drop table t1;
+  show tables;
+  drop table t2;
+  show tables;
+  drop database db4;
+  show databases;
+  
+  
+  show databases;
+  create table t2(name varchar(10));
+  rename table t2 to t3;
+  alter table t3 engine =myisam charset=gbk;
+  show create table t3;
+  alter table t3 add age int;
+  desc t3;
+  alter table  t3 add id int first;
+  desc t3;
+  alter table t3 add sal int after name;
+  desc t3;
+  alter table t3 drop sal;
+  desc t3;
+  alter table t3 change name username varchar(5);
+  desc t3;
+  alter table t3 modify age int after id;
+  desc t3;
+  
+  create database db4 character set utf8;
+  use db4;
+  
+ insert into hero values('tom',18);
+ insert into hero values('刘备',20);
+  insert into hero(name)values('李白');
+  select*from hero;
+  insert into hero(age)values('25');
+  insert into hero values('关羽',19),('张飞',7);
+  insert into hero (name)values('无孔'),('八界'),('沙僧');
+  select* from hero;
+  select name from hero;
+  select age from hero;
+  select * from hero where age=19;
+  select age from hero where name='刘备';
+  update hero set age=30 where name='无孔';
+   update hero set age=25 ,name='无能'  where name='八界'
+  delete from hero where age<20;
+  delete from hero ;
+  
+  
+  
+  #MySQL
+###数据库简介
+- 之前通过流操作文件的方式存储数据的弊端
+1. 执行效率低
+2. 进行增删改查操作，代码书写比较麻烦
+3. 一般只能保存文本数据
+####什么是DB
+- DB：Database 数据库，数据库指一个文件集合
+####什么是DBMS
+- DBMS：Database Management System 数据库管理系统，用于管理数据库文件的软件，常见的DBMS：MySQL Oracle DB2 SQLServer SQLite
+####数据库分类
+1. 关系型数据库： 经过数学理论验证可以保存现实生活中的各种关系 ，以表为单位保存数据  
+2. 非关系型数据库：用于解决某些特定场景比如：高并发访问时的数据缓存，举例：Redis 以key-value形式保存数据
+####常见关系型数据库介绍
+1. MySQL：  市场占有率第一， Oracle公司产品，08年被Sun收购，09年Sun被Oracle收购，  开源， 由于担心MySQL闭源，MySQL创始人们离开Oracle创建了MariaDB（创始人女儿叫Maria）
+2. Oracle： 市场排名第二，Oracle公司产品，闭源产品， 拉里埃里森 32岁
+3. SQLServer： 市场排名第三，微软产品，闭源产品
+4. DB2：  IBM公司产品，闭源产品
+5. Sqlite： 轻量级数据库 安装包几十k 应用在嵌入式设备或移动设备中
+####开源和闭源
+- 开源：开发源代码，盈利方式：靠卖服务， 技术大拿为了刷存在感对开源产品会无偿进行版本维护和升级
+- 闭源：不开放源代码，盈利方式：靠卖产品和卖服务，技术大拿会攻击闭源产品刷存在感，但是闭源公司会花钱养一帮大拿维护升级
+###SQL
+- Structured Query Language：结构化查询语言，SQL执行在客户端(windows的命令行，linux的终端，或三方的数据库客户端软件)或者通过Java代码使用JDBC执行
+- 如何连接MySQL数据库
+1. windows系统在开始菜单栏中->所有程序->MySQL或MariaDB->MySQL Client 然后输入密码
+2. linux系统  在空白区域右键 终端，然后输入
+mysql -uroot -p回车
+
+ exit;     退出   
+###SQL语句规范
+1. 以;结尾
+2. 可以换行，关键字之间用空格分隔(可以有多个空格)
+3. 关键字不区分大小写 
+###数据库相关SQL
+1. 查看所有数据库
+	show databases;
+2. 创建数据库
+	-格式：create database 数据库名;
+	create database db1;
+	-指定字符集格式：create database 数据库名 character set utf8/gbk;
+	create database db2 character set gbk;
+	create database db3 character set utf8;
+3. 查看数据库详情 可以查看数据库的字符集
+	-格式：show create database 数据库名;
+	show create database db1;
+4. 删除数据库
+	-格式：drop database 数据库名;
+	drop database db2;
+5. 使用数据库
+	-格式：use 数据库名;
+	use db1;
+###表相关SQL 
+1. 创建表
+	-格式： create table 表名(字段1名 字段1类型,字段2名 字段2类型);
+	create table person(name varchar(10),age int);
+	创建学生表(student) 姓名name 年龄age 语文chinese 数学math 英语english
+	create table student(name varchar(10),age int,chinese int,math int,english int);
+2. 查看所有表
+	-格式： show tables;
+3. 查看表详情
+	-格式： show create table 表名;
+	show create table person;
+	-数据库表引擎：
+		1. innodb：支持数据库的高级操作，比如：事务、外键等
+		2. myisam：不支持数据库高级操作，只支持基础的增删改查操作
+4. 创建表指定引擎和字符集
+	-格式： create table 表名(字段1名 字段1类型)engine=innodb/myisam ?default charset=utf8/gbk;
+	create table t1(name varchar(10),age int)engine=myisam charset=gbk;
+	show create table t1;
+5. 查看表字段
+	-格式： desc 表名;
+	desc student;
+6. 删除表
+	-格式：drop table 表名;
+	drop table person;
+	show tables;//测试
+####课堂练习：
+1. 创建数据库mydb1 并使用
+	create database mydb1;
+	use mydb1;
+2. 在mydb1里面创建表 t1 和 t2  表里面有两个字段分别是name和age，其中t2的引擎为myisam  t1的字符集为gbk; 通过查看详情检测是否创建成功
+	create table t1(name varchar(10),age int) charset=gbk;
+	create table t2(name varchar(10),age int) engine=myisam;
+3. 删除表t1，t2
+	drop table t1;
+	drop table t2;
+4. 删除数据库mydb1
+	drop database mydb1;
+####对已创建的表进行修改
+	create table t1(name varchar(10));
+1. 修改表名
+	-格式： rename table 原名 to 新名;
+	rename table t1 to t2;
+2. 修改表引擎和字符集
+	-格式: alter table 表名 engine=myisam/innodb charset=utf8/gbk;
+	alter table t2 engine=myisam charset=gbk;
+	show create table t2;//测试
+3. 添加表字段
+	-最后面格式： alter table 表名 add 字段名 字段类型;
+	alter table t2 add age int;
+	desc t2;//测试
+	-最前面格式： alter table 表名 add 字段名 字段类型 first;
+	alter table t2 add id int first;
+	-在某个字段后面添加：alter table 表名 add 字段名 类型 after xxx;
+	alter table t2 add sal int after name;
+4. 删除表字段
+	-格式： alter table 表名 drop 字段名;
+	alter table t2 drop sal;
+	desc t2;//测试
+5. 修改表字段名和类型
+	-格式： alter table 表名 change 原字段名 新字段名 新类型;
+	alter table t2 change name username varchar(5);
+6. 修改表字段类型和位置
+	-格式: alter table 表名 modify 字段名 新类型 first
+	/ (after xxx);
+	alter table t2 modify age int after id;
+
+
+###表相关回顾：
+1. 创建表 create table t1(name varchar(10),age int)engine=myisam/innodb charset=utf8/gbk;
+2. 查看所有表  show tables;
+3. 查看表详情 show create table t1;
+4. 表字段  desc t1;
+5. 删除表 drop table t1;
+6. 修改表名  rename table t1 to t2;
+7. 修改引擎字符集 alter table t1 engine=myisam/innodb charset=utf8/gbk;
+8. 添加表字段  alter table t1 add age int first/after xxx;
+9. 删除表字段 alter table t1 drop age;
+10. 修改表字段名称和类型 alter table t1 change 原名 新名 新类型;
+11. 修改表字段类型和位置 alter table t1 modify 字段名 新类型 first/after xxx;
+####练习：
+1. 创建一个hero表 有 id name type三个字段，引擎为myisam 字符集为gbk
+	create table hero(id int,name varchar(10),type varchar(10)) engine=myisam charset=gbk;
+2. 修改表名为heros
+	rename table hero to heros;
+3. 修改表引擎为innodb  修改字符集为utf8
+	alter table heros engine=innodb charset=utf8;
+4. 修改type字段为 hero_type varchar(30)
+	alter table heros change type hero_type varchar(30);
+5. 添加money字段在name字段的后面
+	alter table heros add money int after name;
+6. 修改name字段到最后
+	alter table heros modify name varchar(10) after hero_type;
+7. 删除hero_type字段
+	alter table heros drop hero_type;
+8. 删除heros表
+	drop table heros;
+###数据相关SQL
+	create database mydb1 character set utf8;
+	use mydb1;
+	create table hero(name varchar(10),age int);
+1. 插入数据
+	-全表插入格式：insert into 表名 values(值1,值2);
+		insert into hero values('Tom',18);
+		insert into hero values('刘备',20);//如果代码没问题却执行报错，先执行以下 set names gbk;
+	-指定字段插入格式：insert into 表名 (字段1名,字段2名) values (值1,值2);
+		insert into hero (name) values('李白');
+	-批量插入格式：在以上两种格式后面写多组数据通过逗号分隔
+		insert into hero values('关羽',19),('张飞',7);
+		insert into hero (name) values('悟空'),('八戒'),('沙僧');
+2. 查询数据
+	-格式： select 字段信息 from 表名 where 条件;
+	1. 查询所有数据 所有字段信息
+	select * from hero;
+	2. 查询所有的名字;
+	select name from hero;
+	3. 查询年龄19岁的所有信息
+	select * from hero where age=19;
+	4. 查询名字为刘备的年龄是多少
+	select age from hero where name='刘备';
+3. 修改数据
+	  update hero set age=30 where name='悟空';
+	  update hero set age=25, name='悟能' where name='八戒';
+- 如果不给条件则修改全表的数据
+4. 删除数据
+	  delete from hero where age<20;
+	  delete from hero;
+- 如果不给条件则删除全表的数据	 
+
+####课程回顾
+1. 数据库相关SQL
+- 查询所有 show databases;
+- 创建 create database db1 character set utf8/gbk;
+- 查看详情 show create database db1;
+- 删除 drop database db1;
+- 使用  use db1;
+2. 表相关SQL
+- 创建 create table t1(name varchar(10),age int) engine=myisaml/innodb charset=utf8/gbk;
+- 查询所有  show tables;
+- 查看详情 show create table t1;
+- 表字段  desc t1;
+- 删除表 drop table t1;
+- 修改表名 rename table t1 to t2;
+- 修改引擎和字符集  alter table t1 engine=myisaml/innodb charset=utf8/gbk;
+- 添加字段  alter table t1 add age int;
+- 删除字段  alter table t1 drop age;
+- 修改字段名和类型  alter table t1 change 原名 新名 新类型
+- 修改类型和位置  alter table t1 modify 字段名 新类型  first/ after xxx;
+4. 数据相关SQL
+- 插入数据  insert into t1 (字段1,字段2) values(值1,值2),(值1,值2);
+- 查询数据 select * from t1 where age>10;
+- 修改数据 update t1 set age=20 where name='xxx';
+- 删除数据  delete from t1 where age=30;
+
+
+[soft01@localhost ~]$ mysql uroot p;
+mysql  Ver 14.14 Distrib 5.6.37, for Linux (x86_64) using  EditLine wrapper
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Usage: mysql [OPTIONS] [database]
+  -?, --help          Display this help and exit.
+  -I, --help          Synonym for -?
+  --auto-rehash       Enable automatic rehashing. One doesn't need to use
+                      'rehash' to get table and field completion, but startup
+                      and reconnecting may take a longer time. Disable with
+                      --disable-auto-rehash.
+                      (Defaults to on; use --skip-auto-rehash to disable.)
+  -A, --no-auto-rehash 
+                      No automatic rehashing. One has to use 'rehash' to get
+                      table and field completion. This gives a quicker start of
+                      mysql and disables rehashing on reconnect.
+  --auto-vertical-output 
+                      Automatically switch to vertical output mode if the
+                      result is wider than the terminal width.
+  -B, --batch         Don't use history file. Disable interactive behavior.
+                      (Enables --silent.)
+  --bind-address=name IP address to bind to.
+  -b, --binary-as-hex Print binary data as hex
+  --character-sets-dir=name 
+                      Directory for character set files.
+  --column-type-info  Display column type information.
+  -c, --comments      Preserve comments. Send comments to the server. The
+                      default is --skip-comments (discard comments), enable
+                      with --comments.
+  -C, --compress      Use compression in server/client protocol.
+  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
+  --debug-check       Check memory and open file usage at exit.
+  -T, --debug-info    Print some debug info at exit.
+  -D, --database=name Database to use.
+  --default-character-set=name 
+                      Set the default character set.
+  --delimiter=name    Delimiter to be used.
+  --enable-cleartext-plugin 
+                      Enable/disable the clear text authentication plugin.
+  -e, --execute=name  Execute command and quit. (Disables --force and history
+                      file.)
+  -E, --vertical      Print the output of a query (rows) vertically.
+  -f, --force         Continue even if we get an SQL error.
+  -G, --named-commands 
+                      Enable named commands. Named commands mean this program's
+                      internal commands; see mysql> help . When enabled, the
+                      named commands can be used from any line of the query,
+                      otherwise only from the first line, before an enter.
+                      Disable with --disable-named-commands. This option is
+                      disabled by default.
+  -i, --ignore-spaces Ignore space after function names.
+  --init-command=name SQL Command to execute when connecting to MySQL server.
+                      Will automatically be re-executed when reconnecting.
+  --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
+  -b, --no-beep       Turn off beep on error.
+  -h, --host=name     Connect to host.
+  -H, --html          Produce HTML output.
+  -X, --xml           Produce XML output.
+  --line-numbers      Write line numbers for errors.
+                      (Defaults to on; use --skip-line-numbers to disable.)
+  -L, --skip-line-numbers 
+                      Don't write line number for errors.
+  -n, --unbuffered    Flush buffer after each query.
+  --column-names      Write column names in results.
+                      (Defaults to on; use --skip-column-names to disable.)
+  -N, --skip-column-names 
+                      Don't write column names in results.
+  --sigint-ignore     Ignore SIGINT (CTRL-C).
+  -o, --one-database  Ignore statements except those that occur while the
+                      default database is the one named at the command line.
+  --pager[=name]      Pager to use to display results. If you don't supply an
+                      option, the default pager is taken from your ENV variable
+                      PAGER. Valid pagers are less, more, cat [> filename],
+                      etc. See interactive help (\h) also. This option does not
+                      work in batch mode. Disable with --disable-pager. This
+                      option is disabled by default.
+  -p, --password[=name] 
+                      Password to use when connecting to server. If password is
+                      not given it's asked from the tty.
+  -P, --port=#        Port number to use for connection or 0 for default to, in
+                      order of preference, my.cnf, $MYSQL_TCP_PORT,
+                      /etc/services, built-in default (3306).
+  --prompt=name       Set the mysql prompt to this value.
+  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
+                      memory).
+  -q, --quick         Don't cache result, print it row by row. This may slow
+                      down the server if the output is suspended. Doesn't use
+                      history file.
+  -r, --raw           Write fields without conversion. Used with --batch.
+  --reconnect         Reconnect if the connection is lost. Disable with
+                      --disable-reconnect. This option is enabled by default.
+                      (Defaults to on; use --skip-reconnect to disable.)
+  -s, --silent        Be more silent. Print results with a tab as separator,
+                      each row on new line.
+  -S, --socket=name   The socket file to use for connection.
+  --ssl               Enable SSL for connection (automatically enabled with
+                      other flags).
+  --ssl-ca=name       CA file in PEM format (check OpenSSL docs, implies
+                      --ssl).
+  --ssl-capath=name   CA directory (check OpenSSL docs, implies --ssl).
+  --ssl-cert=name     X509 cert in PEM format (implies --ssl).
+  --ssl-cipher=name   SSL cipher to use (implies --ssl).
+  --ssl-key=name      X509 key in PEM format (implies --ssl).
+  --ssl-crl=name      Certificate revocation list (implies --ssl).
+  --ssl-crlpath=name  Certificate revocation list path (implies --ssl).
+  --ssl-verify-server-cert 
+                      Verify server's "Common Name" in its cert against
+                      hostname used when connecting. This option is disabled by
+                      default.
+  --ssl-mode=name     SSL connection mode.
+  -t, --table         Output in table format.
+  --tee=name          Append everything into outfile. See interactive help (\h)
+                      also. Does not work in batch mode. Disable with
+                      --disable-tee. This option is disabled by default.
+  -u, --user=name     User for login if not current user.
+  -U, --safe-updates  Only allow UPDATE and DELETE that uses keys.
+  -U, --i-am-a-dummy  Synonym for option --safe-updates, -U.
+  -v, --verbose       Write more. (-v -v -v gives the table output format).
+  -V, --version       Output version information and exit.
+  -w, --wait          Wait and retry if connection is down.
+  --connect-timeout=# Number of seconds before connection timeout.
+  --max-allowed-packet=# 
+                      The maximum packet length to send to or receive from
+                      server.
+  --net-buffer-length=# 
+                      The buffer size for TCP/IP and socket communication.
+  --select-limit=#    Automatic limit for SELECT when using --safe-updates.
+  --max-join-size=#   Automatic limit for rows in a join when using
+                      --safe-updates.
+  --secure-auth       Refuse client connecting to server if it uses old
+                      (pre-4.1.1) protocol.
+                      (Defaults to on; use --skip-secure-auth to disable.)
+  --server-arg=name   Send embedded server this as a parameter.
+  --show-warnings     Show warnings after every statement.
+  --plugin-dir=name   Directory for client-side plugins.
+  --default-auth=name Default authentication client-side plugin to use.
+  --histignore=name   A colon-separated list of patterns to keep statements
+                      from getting logged into mysql history.
+  --binary-mode       By default, ASCII '\0' is disallowed and '\r\n' is
+                      translated to '\n'. This switch turns off both features,
+                      and also turns off parsing of all clientcommands except
+                      \C and DELIMITER, in non-interactive mode (for input
+                      piped to mysql or loaded using the 'source' command).
+                      This is necessary when processing output from mysqlbinlog
+                      that may contain blobs.
+  --connect-expired-password 
+                      Notify the server that this client is prepared to handle
+                      expired password sandbox mode.
+
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf 
+The following groups are read: mysql client
+The following options may be given as the first argument:
+--print-defaults        Print the program argument list and exit.
+--no-defaults           Don't read default options from any option file,
+                        except for login file.
+--defaults-file=#       Only read default options from the given file #.
+--defaults-extra-file=# Read this file after the global files are read.
+--defaults-group-suffix=#
+                        Also read groups with concat(group, suffix)
+--login-path=#          Read this path from the login file.
+
+Variables (--variable-name=value)
+and boolean options {FALSE|TRUE}  Value (after reading options)
+--------------------------------- ----------------------------------------
+auto-rehash                       FALSE
+auto-vertical-output              FALSE
+bind-address                      (No default value)
+binary-as-hex                     FALSE
+character-sets-dir                (No default value)
+column-type-info                  FALSE
+comments                          FALSE
+compress                          FALSE
+debug-check                       FALSE
+debug-info                        FALSE
+database                          (No default value)
+default-character-set             utf8
+delimiter                         ;
+enable-cleartext-plugin           FALSE
+vertical                          FALSE
+force                             FALSE
+named-commands                    FALSE
+ignore-spaces                     FALSE
+init-command                      (No default value)
+local-infile                      FALSE
+no-beep                           FALSE
+host                              (No default value)
+html                              FALSE
+xml                               FALSE
+line-numbers                      TRUE
+unbuffered                        FALSE
+column-names                      TRUE
+sigint-ignore                     FALSE
+port                              3306
+prompt                            mysql> 
+quick                             FALSE
+raw                               FALSE
+reconnect                         TRUE
+socket                            /var/lib/mysql/mysql.sock
+ssl                               FALSE
+ssl-ca                            (No default value)
+ssl-capath                        (No default value)
+ssl-cert                          (No default value)
+ssl-cipher                        (No default value)
+ssl-key                           (No default value)
+ssl-crl                           (No default value)
+ssl-crlpath                       (No default value)
+ssl-verify-server-cert            FALSE
+table                             FALSE
+user                              (No default value)
+safe-updates                      FALSE
+i-am-a-dummy                      FALSE
+connect-timeout                   0
+max-allowed-packet                16777216
+net-buffer-length                 16384
+select-limit                      1000
+max-join-size                     1000000
+secure-auth                       TRUE
+show-warnings                     FALSE
+plugin-dir                        (No default value)
+default-auth                      (No default value)
+histignore                        (No default value)
+binary-mode                       FALSE
+connect-expired-password          FALSE
+[soft01@localhost ~]$ use db2;
+bash: use: 未找到命令...
+[soft01@localhost ~]$ mysgl -uroot -p;
+bash: mysgl: 未找到命令...
+[soft01@localhost ~]$  mysql -uroot -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6
+Server version: 5.6.37 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> creat table student(name varchar(10),age int,chinese int,math int,english int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'creat table student(name varchar(10),age int,chinese int,math int,english int)' at line 1
+mysql> create table student(name varchar(10),age int,chinese int,math int,english int);
+ERROR 1046 (3D000): No database selected
+mysql>  create table student(name varchar(10),age int,chinese int,math int,english int);
+ERROR 1046 (3D000): No database selected
+mysql> use db1;
+ERROR 1049 (42000): Unknown database 'db1'
+mysql> use db2;
+Database changed
+mysql>  create table student(name varchar(10),age int,chinese int,math int,english int);
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| student       |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> show create table person;
+ERROR 1146 (42S02): Table 'db2.person' doesn't exist
+mysql> show create table student;
++---------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table   | Create Table                                                                                                                                                                                                                    |
++---------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| student | CREATE TABLE `student` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `chinese` int(11) DEFAULT NULL,
+  `math` int(11) DEFAULT NULL,
+  `english` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=gbk |
++---------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> create table t1(name varchar(10),age int)engine=myisam charset=gbk;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show create table t1;
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                            |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| t1    | CREATE TABLE `t1` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=gbk |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(10) | YES  |     | NULL    |       |
+| age     | int(11)     | YES  |     | NULL    |       |
+| chinese | int(11)     | YES  |     | NULL    |       |
+| math    | int(11)     | YES  |     | NULL    |       |
+| english | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> drop table student;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| t1            |
++---------------+
+1 row in set (0.01 sec)
+
+mysql> create table student(name varchar(10),age int,chinese int,math int,english int);
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| student       |
+| t1            |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> create database db4 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use db4;
+Database changed
+mysql>  create table t1(name varchar(10),age int);
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> create table t2(name varchar(10),age int)engine=myisam charset=gbk;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| t1            |
+| t2            |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> show create table t1;
++-------+--------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                             |
++-------+--------------------------------------------------------------------------------------------------------------------------+
+| t1    | CREATE TABLE `t1` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++-------+--------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> dosc t1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dosc t1' at line 1
+mysql> desc t1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> show table t2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't2' at line 1
+mysql> 
+mysql> show  create table t2;
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                            |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| t2    | CREATE TABLE `t2` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=gbk |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc t2;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>  drop table t1;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql>  show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| t2            |
++---------------+
+1 row in set (0.00 sec)
+
+mysql>  show table t2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't2' at line 1
+mysql> drop table t2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show  tables;
+Empty set (0.00 sec)
+
+mysql> drop database db4;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database db4 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql>   use db4;
+Database changed
+mysql>   create table t1(name varchar(10),age int);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql>   create table t2(name varchar(10),age int)engine=myisam charset=gbk;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>   show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| t1            |
+| t2            |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql>   show create table t1;
++-------+--------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                             |
++-------+--------------------------------------------------------------------------------------------------------------------------+
+| t1    | CREATE TABLE `t1` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++-------+--------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql>   desc t1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql>   show  create table t2;
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                            |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| t2    | CREATE TABLE `t2` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=gbk |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql>   desc t2;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>   drop table t1;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql>   show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| t2            |
++---------------+
+1 row in set (0.00 sec)
+
+mysql>   drop table t2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>   show tables;
+Empty set (0.00 sec)
+
+mysql>   drop database db4;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>   show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql>  show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql>   create table t1(name varchar(10));
+ERROR 1046 (3D000): No database selected
+mysql> use db2;
+Database changed
+mysql>  create table t1(name varchar(10));
+ERROR 1050 (42S01): Table 't1' already exists
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| student       |
+| t1            |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> create table t2(name varchar(10));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> rename table t2 to t3;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| student       |
+| t1            |
+| t3            |
++---------------+
+3 rows in set (0.00 sec)
+
+mysql> alter ragle t3 engine =myisam charset=gbk;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ragle t3 engine =myisam charset=gbk' at line 1
+mysql> alter table t3 engine =myisam charset=gbk;
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show create table t3;
++-------+-------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                              |
++-------+-------------------------------------------------------------------------------------------+
+| t3    | CREATE TABLE `t3` (
+  `name` varchar(10) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=gbk |
++-------+-------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> alter table t3 add age int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>   desc t3;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>  alter table  t2 add id int first;
+ERROR 1146 (42S02): Table 'db2.t2' doesn't exist
+mysql> alter table  t3 add id int first;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc t3;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table t3 add sal int after name;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>   desc t3;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| sal   | int(11)     | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql>  ater table t3 drop sal;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ater table t3 drop sal' at line 1
+mysql>   desc t3;alter table t3 drop sal;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| sal   | int(11)     | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>   desc t3;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table t3 change name username varchar(5);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc t3;
++----------+------------+------+-----+---------+-------+
+| Field    | Type       | Null | Key | Default | Extra |
++----------+------------+------+-----+---------+-------+
+| id       | int(11)    | YES  |     | NULL    |       |
+| username | varchar(5) | YES  |     | NULL    |       |
+| age      | int(11)    | YES  |     | NULL    |       |
++----------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table t3 modify age int after id;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>   desc t3;
++----------+------------+------+-----+---------+-------+
+| Field    | Type       | Null | Key | Default | Extra |
++----------+------------+------+-----+---------+-------+
+| id       | int(11)    | YES  |     | NULL    |       |
+| age      | int(11)    | YES  |     | NULL    |       |
+| username | varchar(5) | YES  |     | NULL    |       |
++----------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create database db4 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  create table  hero (id int, name varchar(10),type varchar(10))engine=myisam charset=gbk;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> ename table hero to heros;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ename table hero to heros' at line 1
+mysql>  rename table hero to heros;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> use db4;
+Database changed
+mysql> create table hero(name varchar(10),age int);
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> desc hero;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| hero          |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> insert into hero values('tom',18);
+Query OK, 1 row affected (0.04 sec)
+
+mysql>  insert into hero values('刘备',20);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> desc hero;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into hero(name)values('李白');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from hero
+    -> ;
++--------+------+
+| name   | age  |
++--------+------+
+| tom    |   18 |
+| 刘备   |   20 |
+| 李白   | NULL |
++--------+------+
+3 rows in set (0.00 sec)
+
+mysql> insert into hero(age)values('25');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from hero;
++--------+------+
+| name   | age  |
++--------+------+
+| tom    |   18 |
+| 刘备   |   20 |
+| 李白   | NULL |
+| NULL   |   25 |
++--------+------+
+4 rows in set (0.00 sec)
+
+mysql> insert into hero values('关羽',19),('张飞',7);
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql>   insert into hero (name)('无孔')('八界')('沙僧');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''无孔')('八界')('沙僧')' at line 1
+mysql> insert into hero (name)values(('无孔')('八界')('沙僧');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('八界')('沙僧')' at line 1
+mysql> into hero (name)values('无孔')('八界')('沙僧');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'into hero (name)values('无孔')('八界')('沙僧')' at line 1
+mysql>  insert into hero (name)values('无孔')('八界')('沙僧');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('八界')('沙僧')' at line 1
+mysql>  insert into hero (name)values('无孔'),('八界'),('沙僧');
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select from hero;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from hero' at line 1
+mysql> select* from hero;
++--------+------+
+| name   | age  |
++--------+------+
+| tom    |   18 |
+| 刘备   |   20 |
+| 李白   | NULL |
+| NULL   |   25 |
+| 关羽   |   19 |
+| 张飞   |    7 |
+| 无孔   | NULL |
+| 八界   | NULL |
+| 沙僧   | NULL |
++--------+------+
+9 rows in set (0.00 sec)
+
+mysql>  select name from hero;
++--------+
+| name   |
++--------+
+| tom    |
+| 刘备   |
+| 李白   |
+| NULL   |
+| 关羽   |
+| 张飞   |
+| 无孔   |
+| 八界   |
+| 沙僧   |
++--------+
+9 rows in set (0.00 sec)
+
+mysql>  select age from hero;
++------+
+| age  |
++------+
+|   18 |
+|   20 |
+| NULL |
+|   25 |
+|   19 |
+|    7 |
+| NULL |
+| NULL |
+| NULL |
++------+
+9 rows in set (0.00 sec)
+
+mysql>   select * from hero where age=29;
+Empty set (0.00 sec)
+
+mysql>   select age from hero where name='刘备';
++------+
+| age  |
++------+
+|   20 |
++------+
+1 row in set (0.01 sec)
+
+mysql> select * from hero where age=19;
++--------+------+
+| name   | age  |
++--------+------+
+| 关羽   |   19 |
++--------+------+
+1 row in set (0.00 sec)
+
+mysql>   update hero set=30 where name='无孔';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=30 where name='无孔'' at line 1
+mysql>  update hero set age=30 where name='无孔';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select age from hero where name='无孔';
++------+
+| age  |
++------+
+|   30 |
++------+
+1 row in set (0.00 sec)
+
+mysql> update hero set age=25 name='无能'  where name='八界'
+    ->   ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name='无能'  where name='八界'' at line 1
+mysql> update hero set age=25 ,name='无能'  where name='八界'
+    ->   
+    -> ;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from hero;
++--------+------+
+| name   | age  |
++--------+------+
+| tom    |   18 |
+| 刘备   |   20 |
+| 李白   | NULL |
+| NULL   |   25 |
+| 关羽   |   19 |
+| 张飞   |    7 |
+| 无孔   |   30 |
+| 无能   |   25 |
+| 沙僧   | NULL |
++--------+------+
+9 rows in set (0.00 sec)
+
+mysql> delete from hero where age<20;
+Query OK, 3 rows affected (0.06 sec)
+
+mysql> select * from hero;
++--------+------+
+| name   | age  |
++--------+------+
+| 刘备   |   20 |
+| 李白   | NULL |
+| NULL   |   25 |
+| 无孔   |   30 |
+| 无能   |   25 |
+| 沙僧   | NULL |
++--------+------+
+6 rows in set (0.00 sec)
+
+mysql> delete from hero ;
+Query OK, 6 rows affected (0.06 sec)
+
+mysql>  select * from hero;
+Empty set (0.00 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| hero          |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> drop table hero;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| db4                |
+| mysql              |
+| performance_schema |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> drop database db4;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> drop databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databases' at line 1
+mysql> drop database db2;
+Query OK, 4 rows affected (0.11 sec)
+
+mysql> drop database db3;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> exit;
+Bye
+[soft01@localhost ~]$ mysql -uroot -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 7
+Server version: 5.6.37 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database db1 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> rename database db1to db2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database db1to db2' at line 1
+mysql> 
+
+
+
+
+
+
+
+
+
+
+
+
+[soft01@localhost ~]$ mysql uroot p;
+mysql  Ver 14.14 Distrib 5.6.37, for Linux (x86_64) using  EditLine wrapper
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Usage: mysql [OPTIONS] [database]
+  -?, --help          Display this help and exit.
+  -I, --help          Synonym for -?
+  --auto-rehash       Enable automatic rehashing. One doesn't need to use
+                      'rehash' to get table and field completion, but startup
+                      and reconnecting may take a longer time. Disable with
+                      --disable-auto-rehash.
+                      (Defaults to on; use --skip-auto-rehash to disable.)
+  -A, --no-auto-rehash 
+                      No automatic rehashing. One has to use 'rehash' to get
+                      table and field completion. This gives a quicker start of
+                      mysql and disables rehashing on reconnect.
+  --auto-vertical-output 
+                      Automatically switch to vertical output mode if the
+                      result is wider than the terminal width.
+  -B, --batch         Don't use history file. Disable interactive behavior.
+                      (Enables --silent.)
+  --bind-address=name IP address to bind to.
+  -b, --binary-as-hex Print binary data as hex
+  --character-sets-dir=name 
+                      Directory for character set files.
+  --column-type-info  Display column type information.
+  -c, --comments      Preserve comments. Send comments to the server. The
+                      default is --skip-comments (discard comments), enable
+                      with --comments.
+  -C, --compress      Use compression in server/client protocol.
+  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
+  --debug-check       Check memory and open file usage at exit.
+  -T, --debug-info    Print some debug info at exit.
+  -D, --database=name Database to use.
+  --default-character-set=name 
+                      Set the default character set.
+  --delimiter=name    Delimiter to be used.
+  --enable-cleartext-plugin 
+                      Enable/disable the clear text authentication plugin.
+  -e, --execute=name  Execute command and quit. (Disables --force and history
+                      file.)
+  -E, --vertical      Print the output of a query (rows) vertically.
+  -f, --force         Continue even if we get an SQL error.
+  -G, --named-commands 
+                      Enable named commands. Named commands mean this program's
+                      internal commands; see mysql> help . When enabled, the
+                      named commands can be used from any line of the query,
+                      otherwise only from the first line, before an enter.
+                      Disable with --disable-named-commands. This option is
+                      disabled by default.
+  -i, --ignore-spaces Ignore space after function names.
+  --init-command=name SQL Command to execute when connecting to MySQL server.
+                      Will automatically be re-executed when reconnecting.
+  --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
+  -b, --no-beep       Turn off beep on error.
+  -h, --host=name     Connect to host.
+  -H, --html          Produce HTML output.
+  -X, --xml           Produce XML output.
+  --line-numbers      Write line numbers for errors.
+                      (Defaults to on; use --skip-line-numbers to disable.)
+  -L, --skip-line-numbers 
+                      Don't write line number for errors.
+  -n, --unbuffered    Flush buffer after each query.
+  --column-names      Write column names in results.
+                      (Defaults to on; use --skip-column-names to disable.)
+  -N, --skip-column-names 
+                      Don't write column names in results.
+  --sigint-ignore     Ignore SIGINT (CTRL-C).
+  -o, --one-database  Ignore statements except those that occur while the
+                      default database is the one named at the command line.
+  --pager[=name]      Pager to use to display results. If you don't supply an
+                      option, the default pager is taken from your ENV variable
+                      PAGER. Valid pagers are less, more, cat [> filename],
+                      etc. See interactive help (\h) also. This option does not
+                      work in batch mode. Disable with --disable-pager. This
+                      option is disabled by default.
+  -p, --password[=name] 
+                      Password to use when connecting to server. If password is
+                      not given it's asked from the tty.
+  -P, --port=#        Port number to use for connection or 0 for default to, in
+                      order of preference, my.cnf, $MYSQL_TCP_PORT,
+                      /etc/services, built-in default (3306).
+  --prompt=name       Set the mysql prompt to this value.
+  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
+                      memory).
+  -q, --quick         Don't cache result, print it row by row. This may slow
+                      down the server if the output is suspended. Doesn't use
+                      history file.
+  -r, --raw           Write fields without conversion. Used with --batch.
+  --reconnect         Reconnect if the connection is lost. Disable with
+                      --disable-reconnect. This option is enabled by default.
+                      (Defaults to on; use --skip-reconnect to disable.)
+  -s, --silent        Be more silent. Print results with a tab as separator,
+                      each row on new line.
+  -S, --socket=name   The socket file to use for connection.
+  --ssl               Enable SSL for connection (automatically enabled with
+                      other flags).
+  --ssl-ca=name       CA file in PEM format (check OpenSSL docs, implies
+                      --ssl).
+  --ssl-capath=name   CA directory (check OpenSSL docs, implies --ssl).
+  --ssl-cert=name     X509 cert in PEM format (implies --ssl).
+  --ssl-cipher=name   SSL cipher to use (implies --ssl).
+  --ssl-key=name      X509 key in PEM format (implies --ssl).
+  --ssl-crl=name      Certificate revocation list (implies --ssl).
+  --ssl-crlpath=name  Certificate revocation list path (implies --ssl).
+  --ssl-verify-server-cert 
+                      Verify server's "Common Name" in its cert against
+                      hostname used when connecting. This option is disabled by
+                      default.
+  --ssl-mode=name     SSL connection mode.
+  -t, --table         Output in table format.
+  --tee=name          Append everything into outfile. See interactive help (\h)
+                      also. Does not work in batch mode. Disable with
+                      --disable-tee. This option is disabled by default.
+  -u, --user=name     User for login if not current user.
+  -U, --safe-updates  Only allow UPDATE and DELETE that uses keys.
+  -U, --i-am-a-dummy  Synonym for option --safe-updates, -U.
+  -v, --verbose       Write more. (-v -v -v gives the table output format).
+  -V, --version       Output version information and exit.
+  -w, --wait          Wait and retry if connection is down.
+  --connect-timeout=# Number of seconds before connection timeout.
+  --max-allowed-packet=# 
+                      The maximum packet length to send to or receive from
+                      server.
+  --net-buffer-length=# 
+                      The buffer size for TCP/IP and socket communication.
+  --select-limit=#    Automatic limit for SELECT when using --safe-updates.
+  --max-join-size=#   Automatic limit for rows in a join when using
+                      --safe-updates.
+  --secure-auth       Refuse client connecting to server if it uses old
+                      (pre-4.1.1) protocol.
+                      (Defaults to on; use --skip-secure-auth to disable.)
+  --server-arg=name   Send embedded server this as a parameter.
+  --show-warnings     Show warnings after every statement.
+  --plugin-dir=name   Directory for client-side plugins.
+  --default-auth=name Default authentication client-side plugin to use.
+  --histignore=name   A colon-separated list of patterns to keep statements
+                      from getting logged into mysql history.
+  --binary-mode       By default, ASCII '\0' is disallowed and '\r\n' is
+                      translated to '\n'. This switch turns off both features,
+                      and also turns off parsing of all clientcommands except
+                      \C and DELIMITER, in non-interactive mode (for input
+                      piped to mysql or loaded using the 'source' command).
+                      This is necessary when processing output from mysqlbinlog
+                      that may contain blobs.
+  --connect-expired-password 
+                      Notify the server that this client is prepared to handle
+                      expired password sandbox mode.
+
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf 
+The following groups are read: mysql client
+The following options may be given as the first argument:
+--print-defaults        Print the program argument list and exit.
+--no-defaults           Don't read default options from any option file,
+                        except for login file.
+--defaults-file=#       Only read default options from the given file #.
+--defaults-extra-file=# Read this file after the global files are read.
+--defaults-group-suffix=#
+                        Also read groups with concat(group, suffix)
+--login-path=#          Read this path from the login file.
+
+Variables (--variable-name=value)
+and boolean options {FALSE|TRUE}  Value (after reading options)
+--------------------------------- ----------------------------------------
+auto-rehash                       FALSE
+auto-vertical-output              FALSE
+bind-address                      (No default value)
+binary-as-hex                     FALSE
+character-sets-dir                (No default value)
+column-type-info                  FALSE
+comments                          FALSE
+compress                          FALSE
+debug-check                       FALSE
+debug-info                        FALSE
+database                          (No default value)
+default-character-set             utf8
+delimiter                         ;
+enable-cleartext-plugin           FALSE
+vertical                          FALSE
+force                             FALSE
+named-commands                    FALSE
+ignore-spaces                     FALSE
+init-command                      (No default value)
+local-infile                      FALSE
+no-beep                           FALSE
+host                              (No default value)
+html                              FALSE
+xml                               FALSE
+line-numbers                      TRUE
+unbuffered                        FALSE
+column-names                      TRUE
+sigint-ignore                     FALSE
+port                              3306
+prompt                            mysql> 
+quick                             FALSE
+raw                               FALSE
+reconnect                         TRUE
+socket                            /var/lib/mysql/mysql.sock
+ssl                               FALSE
+ssl-ca                            (No default value)
+ssl-capath                        (No default value)
+ssl-cert                          (No default value)
+ssl-cipher                        (No default value)
+ssl-key                           (No default value)
+ssl-crl                           (No default value)
+ssl-crlpath                       (No default value)
+ssl-verify-server-cert            FALSE
+table                             FALSE
+user                              (No default value)
+safe-updates                      FALSE
+i-am-a-dummy                      FALSE
+connect-timeout                   0
+max-allowed-packet                16777216
+net-buffer-length                 16384
+select-limit                      1000
+max-join-size                     1000000
+secure-auth                       TRUE
+show-warnings                     FALSE
+plugin-dir                        (No default value)
+default-auth                      (No default value)
+histignore                        (No default value)
+binary-mode                       FALSE
+connect-expired-password          FALSE
+[soft01@localhost ~]$ use db2;
+bash: use: 未找到命令...
+[soft01@localhost ~]$ mysgl -uroot -p;
+bash: mysgl: 未找到命令...
+[soft01@localhost ~]$  mysql -uroot -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6
+Server version: 5.6.37 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> creat table student(name varchar(10),age int,chinese int,math int,english int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'creat table student(name varchar(10),age int,chinese int,math int,english int)' at line 1
+mysql> create table student(name varchar(10),age int,chinese int,math int,english int);
+ERROR 1046 (3D000): No database selected
+mysql>  create table student(name varchar(10),age int,chinese int,math int,english int);
+ERROR 1046 (3D000): No database selected
+mysql> use db1;
+ERROR 1049 (42000): Unknown database 'db1'
+mysql> use db2;
+Database changed
+mysql>  create table student(name varchar(10),age int,chinese int,math int,english int);
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| student       |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> show create table person;
+ERROR 1146 (42S02): Table 'db2.person' doesn't exist
+mysql> show create table student;
++---------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table   | Create Table                                                                                                                                                                                                                    |
++---------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| student | CREATE TABLE `student` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `chinese` int(11) DEFAULT NULL,
+  `math` int(11) DEFAULT NULL,
+  `english` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=gbk |
++---------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> create table t1(name varchar(10),age int)engine=myisam charset=gbk;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show create table t1;
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                            |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| t1    | CREATE TABLE `t1` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=gbk |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(10) | YES  |     | NULL    |       |
+| age     | int(11)     | YES  |     | NULL    |       |
+| chinese | int(11)     | YES  |     | NULL    |       |
+| math    | int(11)     | YES  |     | NULL    |       |
+| english | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> drop table student;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| t1            |
++---------------+
+1 row in set (0.01 sec)
+
+mysql> create table student(name varchar(10),age int,chinese int,math int,english int);
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| student       |
+| t1            |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> create database db4 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use db4;
+Database changed
+mysql>  create table t1(name varchar(10),age int);
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> create table t2(name varchar(10),age int)engine=myisam charset=gbk;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| t1            |
+| t2            |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> show create table t1;
++-------+--------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                             |
++-------+--------------------------------------------------------------------------------------------------------------------------+
+| t1    | CREATE TABLE `t1` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++-------+--------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> dosc t1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dosc t1' at line 1
+mysql> desc t1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> show table t2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't2' at line 1
+mysql> 
+mysql> show  create table t2;
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                            |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| t2    | CREATE TABLE `t2` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=gbk |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc t2;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>  drop table t1;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql>  show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| t2            |
++---------------+
+1 row in set (0.00 sec)
+
+mysql>  show table t2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 't2' at line 1
+mysql> drop table t2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show  tables;
+Empty set (0.00 sec)
+
+mysql> drop database db4;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database db4 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql>   use db4;
+Database changed
+mysql>   create table t1(name varchar(10),age int);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql>   create table t2(name varchar(10),age int)engine=myisam charset=gbk;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>   show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| t1            |
+| t2            |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql>   show create table t1;
++-------+--------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                             |
++-------+--------------------------------------------------------------------------------------------------------------------------+
+| t1    | CREATE TABLE `t1` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++-------+--------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql>   desc t1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql>   show  create table t2;
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                            |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+| t2    | CREATE TABLE `t2` (
+  `name` varchar(10) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=gbk |
++-------+-------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql>   desc t2;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>   drop table t1;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql>   show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| t2            |
++---------------+
+1 row in set (0.00 sec)
+
+mysql>   drop table t2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>   show tables;
+Empty set (0.00 sec)
+
+mysql>   drop database db4;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>   show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql>  show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql>   create table t1(name varchar(10));
+ERROR 1046 (3D000): No database selected
+mysql> use db2;
+Database changed
+mysql>  create table t1(name varchar(10));
+ERROR 1050 (42S01): Table 't1' already exists
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| student       |
+| t1            |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> create table t2(name varchar(10));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> rename table t2 to t3;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db2 |
++---------------+
+| student       |
+| t1            |
+| t3            |
++---------------+
+3 rows in set (0.00 sec)
+
+mysql> alter ragle t3 engine =myisam charset=gbk;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ragle t3 engine =myisam charset=gbk' at line 1
+mysql> alter table t3 engine =myisam charset=gbk;
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show create table t3;
++-------+-------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                              |
++-------+-------------------------------------------------------------------------------------------+
+| t3    | CREATE TABLE `t3` (
+  `name` varchar(10) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=gbk |
++-------+-------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> alter table t3 add age int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>   desc t3;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>  alter table  t2 add id int first;
+ERROR 1146 (42S02): Table 'db2.t2' doesn't exist
+mysql> alter table  t3 add id int first;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc t3;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table t3 add sal int after name;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>   desc t3;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| sal   | int(11)     | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql>  ater table t3 drop sal;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ater table t3 drop sal' at line 1
+mysql>   desc t3;alter table t3 drop sal;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| sal   | int(11)     | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>   desc t3;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table t3 change name username varchar(5);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc t3;
++----------+------------+------+-----+---------+-------+
+| Field    | Type       | Null | Key | Default | Extra |
++----------+------------+------+-----+---------+-------+
+| id       | int(11)    | YES  |     | NULL    |       |
+| username | varchar(5) | YES  |     | NULL    |       |
+| age      | int(11)    | YES  |     | NULL    |       |
++----------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table t3 modify age int after id;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>   desc t3;
++----------+------------+------+-----+---------+-------+
+| Field    | Type       | Null | Key | Default | Extra |
++----------+------------+------+-----+---------+-------+
+| id       | int(11)    | YES  |     | NULL    |       |
+| age      | int(11)    | YES  |     | NULL    |       |
+| username | varchar(5) | YES  |     | NULL    |       |
++----------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create database db4 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  create table  hero (id int, name varchar(10),type varchar(10))engine=myisam charset=gbk;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> ename table hero to heros;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ename table hero to heros' at line 1
+mysql>  rename table hero to heros;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> use db4;
+Database changed
+mysql> create table hero(name varchar(10),age int);
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> desc hero;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| hero          |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> insert into hero values('tom',18);
+Query OK, 1 row affected (0.04 sec)
+
+mysql>  insert into hero values('刘备',20);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> desc hero;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into hero(name)values('李白');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from hero
+    -> ;
++--------+------+
+| name   | age  |
++--------+------+
+| tom    |   18 |
+| 刘备   |   20 |
+| 李白   | NULL |
++--------+------+
+3 rows in set (0.00 sec)
+
+mysql> insert into hero(age)values('25');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from hero;
++--------+------+
+| name   | age  |
++--------+------+
+| tom    |   18 |
+| 刘备   |   20 |
+| 李白   | NULL |
+| NULL   |   25 |
++--------+------+
+4 rows in set (0.00 sec)
+
+mysql> insert into hero values('关羽',19),('张飞',7);
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql>   insert into hero (name)('无孔')('八界')('沙僧');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''无孔')('八界')('沙僧')' at line 1
+mysql> insert into hero (name)values(('无孔')('八界')('沙僧');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('八界')('沙僧')' at line 1
+mysql> into hero (name)values('无孔')('八界')('沙僧');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'into hero (name)values('无孔')('八界')('沙僧')' at line 1
+mysql>  insert into hero (name)values('无孔')('八界')('沙僧');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('八界')('沙僧')' at line 1
+mysql>  insert into hero (name)values('无孔'),('八界'),('沙僧');
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select from hero;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from hero' at line 1
+mysql> select* from hero;
++--------+------+
+| name   | age  |
++--------+------+
+| tom    |   18 |
+| 刘备   |   20 |
+| 李白   | NULL |
+| NULL   |   25 |
+| 关羽   |   19 |
+| 张飞   |    7 |
+| 无孔   | NULL |
+| 八界   | NULL |
+| 沙僧   | NULL |
++--------+------+
+9 rows in set (0.00 sec)
+
+mysql>  select name from hero;
++--------+
+| name   |
++--------+
+| tom    |
+| 刘备   |
+| 李白   |
+| NULL   |
+| 关羽   |
+| 张飞   |
+| 无孔   |
+| 八界   |
+| 沙僧   |
++--------+
+9 rows in set (0.00 sec)
+
+mysql>  select age from hero;
++------+
+| age  |
++------+
+|   18 |
+|   20 |
+| NULL |
+|   25 |
+|   19 |
+|    7 |
+| NULL |
+| NULL |
+| NULL |
++------+
+9 rows in set (0.00 sec)
+
+mysql>   select * from hero where age=29;
+Empty set (0.00 sec)
+
+mysql>   select age from hero where name='刘备';
++------+
+| age  |
++------+
+|   20 |
++------+
+1 row in set (0.01 sec)
+
+mysql> select * from hero where age=19;
++--------+------+
+| name   | age  |
++--------+------+
+| 关羽   |   19 |
++--------+------+
+1 row in set (0.00 sec)
+
+mysql>   update hero set=30 where name='无孔';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=30 where name='无孔'' at line 1
+mysql>  update hero set age=30 where name='无孔';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select age from hero where name='无孔';
++------+
+| age  |
++------+
+|   30 |
++------+
+1 row in set (0.00 sec)
+
+mysql> update hero set age=25 name='无能'  where name='八界'
+    ->   ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name='无能'  where name='八界'' at line 1
+mysql> update hero set age=25 ,name='无能'  where name='八界'
+    ->   
+    -> ;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from hero;
++--------+------+
+| name   | age  |
++--------+------+
+| tom    |   18 |
+| 刘备   |   20 |
+| 李白   | NULL |
+| NULL   |   25 |
+| 关羽   |   19 |
+| 张飞   |    7 |
+| 无孔   |   30 |
+| 无能   |   25 |
+| 沙僧   | NULL |
++--------+------+
+9 rows in set (0.00 sec)
+
+mysql> delete from hero where age<20;
+Query OK, 3 rows affected (0.06 sec)
+
+mysql> select * from hero;
++--------+------+
+| name   | age  |
++--------+------+
+| 刘备   |   20 |
+| 李白   | NULL |
+| NULL   |   25 |
+| 无孔   |   30 |
+| 无能   |   25 |
+| 沙僧   | NULL |
++--------+------+
+6 rows in set (0.00 sec)
+
+mysql> delete from hero ;
+Query OK, 6 rows affected (0.06 sec)
+
+mysql>  select * from hero;
+Empty set (0.00 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_db4 |
++---------------+
+| hero          |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> drop table hero;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| db4                |
+| mysql              |
+| performance_schema |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> drop database db4;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db2                |
+| db3                |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> drop databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databases' at line 1
+mysql> drop database db2;
+Query OK, 4 rows affected (0.11 sec)
+
+mysql> drop database db3;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> exit;
+Bye
+[soft01@localhost ~]$ mysql -uroot -p;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 7
+Server version: 5.6.37 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database db1 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> rename database db1to db2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database db1to db2' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| db1                |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> drop database db1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> create database db1 character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use db1;
+Database changed
+mysql> create table student (name varchar(10),chinese int ,math int, english int)engine=mysiam charset=utf8;
+ERROR 1286 (42000): Unknown storage engine 'mysiam'
+mysql> create table student (name varchar(10),chinese int ,math int, english int)engine=myisam charset=utf8;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(10) | YES  |     | NULL    |       |
+| chinese | int(11)     | YES  |     | NULL    |       |
+| math    | int(11)     | YES  |     | NULL    |       |
+| english | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into student values('zs',70,80,90);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from student;
++------+---------+------+---------+
+| name | chinese | math | english |
++------+---------+------+---------+
+| zs   |      70 |   80 |      90 |
++------+---------+------+---------+
+1 row in set (0.00 sec)
+
+mysql> insert into student values('ww',70,80,90);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  select*from student;
++------+---------+------+---------+
+| name | chinese | math | english |
++------+---------+------+---------+
+| zs   |      70 |   80 |      90 |
+| ww   |      70 |   80 |      90 |
++------+---------+------+---------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student add draw int first math;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'math' at line 1
+mysql> alter table student add draw int before math;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'before math' at line 1
+mysql> alter table student add draw int after math;
+Query OK, 2 rows affected (0.04 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(10) | YES  |     | NULL    |       |
+| chinese | int(11)     | YES  |     | NULL    |       |
+| math    | int(11)     | YES  |     | NULL    |       |
+| draw    | int(11)     | YES  |     | NULL    |       |
+| english | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select*from student;
++------+---------+------+------+---------+
+| name | chinese | math | draw | english |
++------+---------+------+------+---------+
+| zs   |      70 |   80 | NULL |      90 |
+| ww   |      70 |   80 | NULL |      90 |
++------+---------+------+------+---------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student add draw int first;
+ERROR 1060 (42S21): Duplicate column name 'draw'
+mysql> alter table student add draw int first
+    -> 
+    -> ;
+ERROR 1060 (42S21): Duplicate column name 'draw'
+mysql> alter table student add yinle int first;
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| yinle   | int(11)     | YES  |     | NULL    |       |
+| name    | varchar(10) | YES  |     | NULL    |       |
+| chinese | int(11)     | YES  |     | NULL    |       |
+| math    | int(11)     | YES  |     | NULL    |       |
+| draw    | int(11)     | YES  |     | NULL    |       |
+| english | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alert table student drop yinle;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert table student drop yinle' at line 1
+mysql> alter table student drop yinle;
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(10) | YES  |     | NULL    |       |
+| chinese | int(11)     | YES  |     | NULL    |       |
+| math    | int(11)     | YES  |     | NULL    |       |
+| draw    | int(11)     | YES  |     | NULL    |       |
+| english | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table student change draw yinle int;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(10) | YES  |     | NULL    |       |
+| chinese | int(11)     | YES  |     | NULL    |       |
+| math    | int(11)     | YES  |     | NULL    |       |
+| yinle   | int(11)     | YES  |     | NULL    |       |
+| english | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student modify math int first chinese;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'chinese' at line 1
+mysql> alter table student modify math int after yinle;
+Query OK, 2 rows affected (0.04 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> alter table student modify math int first;
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| math    | int(11)     | YES  |     | NULL    |       |
+| name    | varchar(10) | YES  |     | NULL    |       |
+| chinese | int(11)     | YES  |     | NULL    |       |
+| yinle   | int(11)     | YES  |     | NULL    |       |
+| english | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into student (name) values('ls'),('we');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from student;
++------+------+---------+-------+---------+
+| math | name | chinese | yinle | english |
++------+------+---------+-------+---------+
+|   80 | zs   |      70 |  NULL |      90 |
+|   80 | ww   |      70 |  NULL |      90 |
+| NULL | ls   |    NULL |  NULL |    NULL |
+| NULL | we   |    NULL |  NULL |    NULL |
++------+------+---------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> update student set chinese=90 where name='zs';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from student;
++------+------+---------+-------+---------+
+| math | name | chinese | yinle | english |
++------+------+---------+-------+---------+
+|   80 | zs   |      90 |  NULL |      90 |
+|   80 | ww   |      70 |  NULL |      90 |
+| NULL | ls   |    NULL |  NULL |    NULL |
+| NULL | we   |    NULL |  NULL |    NULL |
++------+------+---------+-------+---------+
+4 rows in set (0.00 sec)
+
+mysql> 
+
+
+
+ 

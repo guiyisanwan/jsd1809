@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/* 无参无返回值方法 */
+	function fn1(){
+		alert("fn1执行");
+	}
+	//调用 
+	//fn1();
+	/* 有参无返回值 */
+	function fn2(name,age){
+		alert(name+":"+age);
+	}
+	//调用
+	//fn2("曹操",20);
+	/* 有参有返回值 */ 
+	function fn3(x,y){
+		return x*y;
+	}
+	var result = fn3(2,3);
+	//alert(result);
+	/* 无参数有返回值 */
+	function fn4(){
+		return "啦啦啦";
+	}
+	//调用
+	//alert(fn4());
+	/* 第二种声明方法的方式 */
+	var fn5 = function(name,age){
+		alert(name+":"+age);
+	}
+	//fn5("关羽",28); 
+	/* 第三种声明方法的方式  最后一个参数是方法体，
+	前面的参数都是该方法的参数*/
+	var fn6 = new Function("name","alert(name)");
+	fn6("财神爷"); 
+	
+	
+</script>
+</head>
+<body>
+<input type="button" value="按钮"
+	 onclick="fn1()">
+</body>
+</html>
+
+
+
+

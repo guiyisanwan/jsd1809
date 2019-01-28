@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var x = 0;
+	onclick = function(){
+		x+=10;
+		myimg.style.marginLeft=x+"px";
+	}
+	
+	/* 开启定时器 */
+	setInterval(function(){
+		x+=1;
+		myimg.style.marginLeft=x+"px";
+		if(x>=300){
+			x=0;
+		}
+	},10);
+	
+</script>
+</head>
+<body>
+<div id="d1">这是div</div>
+<img id="myimg" src="../imgs/2.gif"> 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

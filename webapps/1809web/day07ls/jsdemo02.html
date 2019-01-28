@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- script 只能单独加载外部JS脚本，
+不能在加载JS脚本的同时在内部声明JS脚本 -->
+<script type="text/javascript" 
+	src="js/hello.js"></script>
+	
+<script type="text/javascript">
+//网页加载期间执行的 JS 脚本 
+console.log("Hello World");
+//声明一个JS函数（方法）
+function hello(){
+	console.log("Hello!"); 
+}
+</script>
+</head>
+<body>
+	<h1>内部式JS</h1>
+	<div onclick="hello()">演示</div> 
+	<h1>外部式JS</h1>
+	<div onclick="demo()">演示外部式JS</div>
+</body>
+</html>
+
+
+
+

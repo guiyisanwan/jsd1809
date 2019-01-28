@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div,img{
+width: 200px;
+height: 150px;
+
+}
+div{
+position: relative;
+}
+img{
+position: absolute;
+}
+</style>
+
+<script type="text/javascript">
+onload=function(){
+	var arr=document.getElementsByTagName("img");
+	for(var i=0;i<arr.length;i++){
+		arr[i].style.left=i*200+"px";
+	}
+}
+var moveTimer=setInterval(function(){
+	var arr=document.getElementsByTagName("img");
+	for(var i=0;i<arr.length;i++){
+		var img=arr[i];
+		var oldleft = parseInt(img.style.left);
+		oldLeft-=2;
+		//img.style.left=oldLeft+"px"
+		if(oldLeft<=-200){
+			oldLeft=(arr.length-1)*400;
+		}
+		img.style.left=oldLeft+"px";
+	},10);
+	
+}
+</script>
+</head>
+<body>
+<div>
+<img src="../imgs/a.jpg">
+<img src="../imgs/b.jpg">
+<img src="../imgs/k.jpg">
+</div>
+</body>
+</html>

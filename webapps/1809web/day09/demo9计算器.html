@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#d1{
+width: 200px;
+border: 4px solid #ccc;
+overflow: hidden;
+padding-bottom: 4px;
+
+}
+#d2{
+width:135px;
+height:37px;
+float: left; 
+border: 4px solid #ccc;
+margin: 4px 0 0 4px;
+overflow: scroll;
+text-align: center;
+line-height: 37px;
+}
+input{
+width: 45px;
+height: 45px;/*input加外编剧,加边框是内推,者是一个它的特性*/
+float: left;/*此步已证明,input里的内容天然句中,不浮动时两者之间有间距,一浮动,间距每了*/
+border: 4px solid #ccc;
+margin: 4px 0 0 4px;
+
+}
+</style>
+<script type="text/javascript">
+function fn(){
+	var obj=event.target;
+	if(obj.nodeName!="INPUT"){
+		return;
+	}
+	var str=obj.value;
+	if(str=='c'){
+		d2.innerHTML=""
+		}
+	else if(str=='='){
+		d2.innerHTML=eval(d2.innerHTML);alert(eval(d2.innerHTML));
+		}
+	else{
+		d2.innerHTML+=str;
+	}
+	
+}
+</script>
+</head>
+<body>
+<div id="d1" onclick="fn()">
+	  <div id="d2"></div>
+		<input type="button" value="c" >
+		<input type="button" value="7">
+		<input type="button" value="8" >
+		<input type="button" value="9" >
+		<input type="button" value="/" >
+		<input type="button" value="4">
+		<input type="button" value="5" >
+		<input type="button" value="6" >
+		<input type="button" value="*" >
+		<input type="button" value="1" >
+		<input type="button" value="2" >
+		<input type="button" value="3" >
+		<input type="button" value="-" >
+		<input type="button" value="0"  >
+		<input type="button" value="." >
+		<input type="button" value="=" >
+		<input type="button" value="+" >
+</div>
+</body>
+</html>

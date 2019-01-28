@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("input[value='加入购物车']").click(function(){
+			//alert("啦啦啦");
+			var nametd = $("<td></td>");
+			var pricetd = $("<td></td>");
+			var numtd = $("<td><input type='button' value='-' onclick='num(-1)'><span>1</span><input type='button' value='+' onclick='num(1)'></td>");
+			var moneytd = $("<td></td>");
+			var deltd = $("<td><input type='button' value='X' onclick='del(this)'></td>");
+			//得到按钮所在td的兄弟td们
+			var tds = $(this).parent().siblings();
+			//得到商品名称 放到nametd中
+			nametd.text(tds.eq(0).text());
+			//得到商品单价 放到pricetd中
+			pricetd.text(tds.eq(1).text());
+			moneytd.text(tds.eq(1).text());
+			//创建tr把td装进去 
+			var tr = $("<tr></tr>");
+			tr.append(nametd);
+			tr.append(pricetd);
+			tr.append(numtd);
+			tr.append(moneytd);
+			tr.append(deltd);
+			//把tr插入到总价tr的上面
+			$("#total").before(tr);
+			
+			cal();//计算总价
+		})
+	})
+	//删除按钮
+	function del(btn){
+		$(btn).parent().parent().remove();
+		cal();//计算总价
+	}
+	function num(x){
+		 
+		//得到事件源（按钮）
+		var obj = event.target;
+		//得到原来的数值 
+		var num = 
+			parseInt($(obj).siblings("span").text());
+		num+=x;
+		if(num<1){
+			num=1;
+		}
+		//把计算后的值放回span中
+		$(obj).siblings("span").text(num);
+		//先得到单价和num相乘 然后给金额赋值 
+		var price = 
+			$(obj).parent().siblings().eq(1).text();
+		//把单价和数量相乘的结果给到金额
+		$(obj).parent().siblings().eq(2)
+				.text(price*num);
+ 	
+		cal();//计算总价
+	}
+	
+	function cal(){
+		var total = 0;
+		//得到第二个table 里面的所有tr 并遍历
+		$("table:last tr").each(function(){
+			//得到tr里面所有td中的第4个td 取出文本
+			var money = 
+				$(this).children().eq(3).text(); 
+			 //判断如果money不能为金额 也不能为空字符串
+			if(!isNaN(money)&&money!=""){
+				total+=parseInt(money);
+			}
+			//把总价显示到td里面
+			$("#total td").text("总价："+total+"元");
+		})
+	}
+	
+	
+</script>
+
+<style type="text/css">
+	h1{
+		text-align: center;
+	}
+	table{
+		margin: 0 auto;
+		width: 70%;
+		border: 1px solid red;
+		/* 单元格边框间距为0 */
+		border-collapse: collapse;
+		text-align: center;
+	}
+	td,th{
+		border: 1px solid red;
+	}
+	#total{
+		text-align: right;
+	}
+</style>
+</head>
+<body>
+
+<h1>特价商品</h1>
+<table>
+	<tr>
+		<th>商品名称</th>
+		<th>商品单价</th>
+		<th>商品库存</th>
+		<th>好评率</th>
+		<th>操作</th>
+	<tr>
+	<tr>
+		<td>水杯</td>
+		<td>25</td>
+		<td>3</td>
+		<td>89</td>
+		<td><input type="button" value="加入购物车"></td>
+	</tr>
+	<tr>
+		<td>鼠标</td>
+		<td>50</td>
+		<td>100</td>
+		<td>92</td>
+		<td><input type="button" value="加入购物车"></td>
+	</tr>
+	<tr>
+		<td>键盘</td>
+		<td>120</td>
+		<td>30</td>
+		<td>95</td>
+		<td><input type="button" value="加入购物车"></td>
+	</tr>
+	<tr>
+		<td>苹果电脑</td>
+		<td>6888</td>
+		<td>10</td>
+		<td>98</td>
+		<td><input type="button" value="加入购物车"></td>
+	</tr>
+	<tr>
+		<td>达内学习卡</td>
+		<td>9888</td>
+		<td>1000</td>
+		<td>100</td>
+		<td><input type="button" value="加入购物车"></td>
+	</tr>
+</table>
+<h1>购物车</h1>
+<table>
+	<tr>
+		<td>商品名称</td>
+		<td>单价</td>
+		<td>数量</td>
+		<td>金额</td>
+		<td>操作</td>
+	</tr>
+	<tr id="total">
+		<td colspan="5">总价：</td>
+	</tr>
+</table>
+
+</body>
+</html>

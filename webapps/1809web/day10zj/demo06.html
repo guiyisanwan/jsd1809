@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var arr=[
+	["秦黄岛","唐山","保定"],
+	["太原","大同","吕梁"],
+	["武汉","荆州","襄阳"],
+]
+function changefn(){
+	s2.innerHTML="<option>请选择<option";
+	if(isNaN(s1.value)){return;}
+	//alert(s1.value);
+	var citys=arr[s1.value];
+	for(var i=0;i<citys.length;i++){
+		var city=citys[i];
+		var op=document.createElement("option");
+		op.innerHTML=city;
+		s2.appendChild(op);
+	}
+}
+</script>
+</head>
+<body>
+<select id="s1" onchange="changefn()">
+<option >请选择</option>
+<option value="0">河北</option>
+<option value="1">山西</option>
+<option value="2"> 湖北</option>
+</select>
+<select id="s2"></select>
+</body>
+</html>

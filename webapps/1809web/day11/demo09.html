@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div,p,input{
+border: 1px solid red;
+}
+</style>
+</head><!-- 事件冒泡 -->
+<body>
+<div onclick="alert('div事件')">
+<p onclick="alert('p事件')">
+ <input type="button" value="按钮" onclick="alert('按钮事件')">
+ </p>
+ </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+function test(){
+	var total;
+	// undefined 参与计算，结果为 NaN
+	// 如果计算结果为 NaN 则参数计算的数据有 undefined
+	var sum = total * 0.8;
+	console.log(sum);
+	//NaN 可以作为false
+	if(sum){
+		console.log("true");
+	}else{
+		console.log("false");
+	}
+}
+
+</script>
+</head>
+<body>
+	<h1>NaN现象</h1>
+	<p onclick="test()">Test</p>
+</body>
+</html>

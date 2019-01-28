@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function test(){
+	var n; 
+	if(n){
+		console.log("true");
+	}else{
+		console.log("false");
+	}
+	n = 0;
+	if(n){
+		console.log("true");
+	}else{
+		console.log("false");
+	}
+	n = null;
+	if(n){
+		console.log("true");
+	}else{
+		console.log("false");
+	}
+	n = "";
+	if(n){
+		console.log("true");
+	}else{
+		console.log("false");
+	}
+}
+
+function print(n){
+	if(n){
+		console.log("true");
+	}else{
+		console.log("false");
+	}
+}
+function test2(){
+	print(5);
+	print("abc");
+	print([1,2,3]);
+}
+</script>
+</head>
+<body>
+	<h1>特殊值作为false使用</h1>
+	<div onclick="test()">测试</div>
+	<h1>非"空"作为 true 使用</h1>
+	<div onclick="test2()">测试</div>
+</body>
+</html>

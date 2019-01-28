@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>$()函数的使用</h1>
+	<div id="msg"></div>
+
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+//页面加载以后执行的函数
+$(function(){
+	console.log("Hello World");
+});
+//可以多次注册$(function(){})函数，启动时候都会被执行。
+$(function(){
+	//利用$()函数将字符串转换为JQuery对象
+	var span=$("<span>test</span>");
+	//append()将span追加到 div 元素中
+	$("#msg").append(span);
+});
+
+</script>
+</body>
+</html>
+
+
+

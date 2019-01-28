@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<ul>
+		<li >同学
+			<ul class="second_ul">
+				<li>刘德华</li>
+				<li>张学友</li>
+				<li>郭富城</li>
+			</ul>
+		</li>
+		<li >亲戚
+			<ul class="second_ul">
+				<li>习大大</li>
+				<li>老干妈</li>
+				<li>凤姐</li>
+			</ul>
+		</li>
+		<li >女友
+			<ul class="second_ul">
+				<li>美女1</li>
+				<li>美女2</li>
+				<li>美女3</li>
+			</ul>
+		</li>
+	</ul>
+	<script type="text/javascript" 
+	src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript">
+	//让所有二级ul隐藏
+	$(function(){
+		$("li>ul").hide();
+		$("body>ul>li").click(function(){
+			$(this).children().toggle();
+			$(this).siblings().children().hide();
+		})
+	})
+	</script>
+</body>
+</html>
+
+
+

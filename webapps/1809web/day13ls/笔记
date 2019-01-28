@@ -1,0 +1,87 @@
+###课程回顾：
+####选择器
+1. 基础选择器
+- 标签名选择器  $("div")
+- id选择器     $("#id")
+- class选择器	$(".class")
+- 分组选择器		$("div,span")
+- 任意元素选择器  $("*")
+2. 层级选择器
+- 子孙后代选择器  div span
+- 子元素选择器  div>span
+- 弟弟元素选择器  #id+span
+- 弟弟们元素选择器 #id~span
+- 层级方法：
+	1. 兄弟元素    $("#id").siblings("div");
+	2. 哥哥元素    $("#id").prev();
+	3. 哥哥们元素  $("#id").prevAll();
+	4. 弟弟元素    $("#id").next();
+	5. 弟弟们元素  $("#id").nextAll();
+3. 过滤选择器
+- 第一个div   $("div:first")
+- 最后一个div div:last
+- 奇数   div:odd
+- 偶数   div:even
+- 等于   div:eq(n)
+- 小于   div:lt(n)
+- 大于   div:gt(n)
+- class不为one		 div:not(.one)
+4. 内容选择器
+- 空元素的div    div:empty
+- 非空元素的div   div:parent
+- 包含p的div    div:has(p)
+- 包含abc文本的div   div:contains('id')
+5. 可见选择器
+- 可见div元素     div:visible
+- 不可见div元素   div:hidden
+- 元素隐藏显示的方法
+	1. show(); 显示
+	2. hide(); 隐藏
+	3. toggle(); 隐藏显示切换
+6. 属性选择器
+- 匹配包含id属性的div    $("div[id]")
+- 匹配id属性值为abc的div $("div[id='abc']")
+- 匹配id属性值不为abc的div $("div[id!='abc']")
+7. 子元素选择器
+- 匹配是div子元素并且是第一个     $("div:first-child")
+- 匹配是div子元素并且是最后一个	$("div:last-child")
+- 匹配是div子元素并且是第n个		$("div:nth-child(n)")
+8. 表单选择器
+- 匹配所有表单中的控件  :input
+- 匹配所有密码框    :password
+- 匹配所有单选     :radio
+- 匹配所有多选     :checkbox
+- 匹配所有选中的单选、多选、下拉选  :checked
+- 匹配所有的选中的单选和多选          input:checked
+- 匹配所有选中的下拉选  :selected
+
+###DOM操作
+1. 创建元素  
+	var d = $("<div>abc</div>");
+2. 添加元素
+	$("#big").append(d); //最后面
+	$("#big").prepend(d);//最前面
+3. 插入元素
+	兄弟元素.after(d);//插入到兄弟元素的后面
+	兄弟元素.before(d);//插入到兄弟元素的前面
+4. 删除元素
+	$("#abc").remove();  
+5. 修改和获取元素的样式
+	$("#abc").css("样式名称","样式的值"); 
+	$("#abc").css("样式名称"); //获取样式的值
+6. 修改和获取元素的文本内容
+	$("#abc").text();
+	$("#abc").text("xxx");
+7. 修改和获取元素的html内容
+	$("#abc").html();
+	$("#abc").html("<h1>xxx</h1>");
+8. 修改和获取元素的属性
+	$("#abc").attr("class","mm");
+	$("#abc").attr("class");
+
+###事件模拟
+	//触发元素的点击事件
+		$("input").trigger("click");
+
+###动画相关
+

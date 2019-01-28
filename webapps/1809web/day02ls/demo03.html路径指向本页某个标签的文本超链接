@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<a href="#girl1">美女1号</a><!--  路径指向本页某个标签的文本超链接-->
+<a href="#girl2">美女2号</a>
+<a href="#girl3">美女3号</a>
+<a href="#girl4">美女4号</a>
+<hr>
+<a id="girl1"></a>
+<img src="../imgs/a.jpg" width="100%">
+<a id="girl2"></a>
+<img src="../imgs/b.jpg" width="100%">
+<img id="girl3" src="../imgs/k.jpg" width="100%">
+<img id="girl4" src="../imgs/l.jpg" width="100%">
+</body>
+</html>
+
+
+

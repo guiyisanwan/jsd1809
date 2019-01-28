@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function myfn(){
+	if(i1.value.startsWith("http://")){
+		location.href=i1.value;
+	}else{
+		location.href="http://"+i1.value
+	}
+	
+}
+
+</script>
+</head>
+<body>
+<input type="text" id="i1" >&nbsp;<button id="bu" onclick="myfn()">go</button>
+</body>
+</html>

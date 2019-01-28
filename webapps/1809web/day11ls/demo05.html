@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">//从上往下加载,但不执行,只有事件触发后才会执行
+	function downfn(){
+		console.log("键盘按下 字符编码："
+				+event.keyCode);
+		if(event.keyCode==13){
+			//alert("啦啦啦");
+			login_btn.onclick();
+		}
+	}
+	function upfn(){
+		//把键盘的字符编码 转成字符
+		var str = String.fromCharCode(event.keyCode);
+		console.log("键盘抬起:"+str); 
+		
+		alert(this);
+	}
+	onload = function(){
+		btn.onclick = function(){//动态绑定
+			var obj = event.target||event.srcElement;
+			alert("试试就试试"+obj); 
+			alert("试试就试试"+this); 
+		}
+	}
+</script>
+</head>
+<body>
+<input type="button" value="点我试试" id="btn"> 
+
+<input type="text" onkeydown="downfn()"
+	onkeyup="upfn()">
+<input type="button" id="login_btn" value="登录" 
+onclick="alert('登录成功')"> 
+
+</body>
+</html>
+

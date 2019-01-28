@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>属性选择器</h1>
+	<h2>注册</h2>
+	<form action="">
+		<div>
+			<label>姓名：</label>
+			<input id="name" type="text" >
+			<span></span>
+		</div>
+		<div>
+			<label>电话：</label>
+			<input id="mobile" type="text">
+			<span></span>
+		</div>
+		<div>
+			<label>密码：</label>
+			<input id="password" 
+				type="password">
+			<span></span>
+		</div>
+		<div>
+			<label>确认密码：</label>
+			<input id="confirm"
+				type="password">
+			<span></span>
+		</div>
+		<div>
+			<label>角色：</label>
+			<input id="admin" type="checkbox" 
+				value="100" name="role">
+			<label for="admin">管理员</label>
+			<input id="admin01" type="checkbox" 
+				value="200" name="role">
+			<label for="admin01">男宿舍管理员</label>
+			<input id="user" type="checkbox" 
+				value="300" name="role">
+			<label for="user">群众</label>
+			<span></span>
+		</div>
+		<div>
+			<input type="submit" value="注册">
+		</div>
+	</form>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//使用属性选择器选择 属性type是submit的元素 
+	$("input[type='submit']").val("开始注册");
+	
+	//获取form的第一个div子元素
+	$('form div:first-child').css(
+			'background-color','#eee');
+	//获取form的最后一个div子元素 
+	$('form div:last-child').css(
+			'background-color','#000');
+	
+	
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+

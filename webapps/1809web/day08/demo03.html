@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+//age  name salary
+/* 因为数组中有可能保存自定义的对象，通过自定义排序方法
+可以指定任意的排序规则 */
+	/* var persons = [p1,p2,p3,p4,p5];
+	function mysort(a,b){
+		 return a.salary-b.salary;
+	}
+	persons.sort(2); */
+
+
+	var arr = [3,2,33,31,18,22];
+	/*自定义排序方法 */
+	function mysort(a,b){
+		//return a-b;//升序
+		return b-a;//降序
+	}
+	//排序 
+	arr.sort(mysort);
+	//alert(arr);
+ 	function myfn(){
+ 		var i = document.getElementById("i1");
+ 		alert(i.value);
+ 	}
+</script>
+</head>
+<body>
+  <input type="text" id="i1" value="abc">
+  <input type="button" value="按钮" 
+  onclick="myfn()">
+</body>
+</html>
+
+
+

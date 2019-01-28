@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		$("input[value='添加']").click(function(){
+			var nametd = $("<td></td>");
+			var agetd = $("<td></td>");
+			var saltd = $("<td></td>");
+			var deltd = $("<td><input type='button' onclick='del(this)' value='删除'></td>");
+			nametd.html($("input:first").val());
+			agetd.html($("input:eq(1)").val());
+			saltd.html($("input:eq(2)").val());
+			//创建tr
+			var tr = $("<tr></tr>");
+			tr.append(nametd);
+			tr.append(agetd);
+			tr.append(saltd);
+			tr.append(deltd);
+			//把tr添加到table里面
+			$("table").append(tr);
+			
+		})
+	})
+	
+	function del(btn){
+		//删除按钮所在行
+		$(btn).parent().parent().remove();
+	}
+</script>
+</head>
+<body>
+<input type="text" placeholder="姓名">
+<input type="text" placeholder="年龄">
+<input type="text" placeholder="工资">
+<input type="button" value="添加">
+<hr>
+<table>
+	<caption>员工表</caption>
+	<tr>
+		<th>姓名</th><th>年龄</th>
+		<th>工资</th><th>操作</th>
+	</tr>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

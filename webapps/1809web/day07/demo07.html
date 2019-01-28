@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function test(){
+	var a=Math.random()*100;
+	var b=parseInt(a);
+	var p=3.1414926;
+	p=p.toFixed(4);
+	console.log(p);
+	var s=b*b*p;
+	span=document.getElementById("s1");
+	span.innerHTML=s;
+}
+</script>
+</head>
+<body>
+<span  onclick="test()">你好</span><br>
+<span id="s1" onclick="test()">测试</span>
+</body>
+</html>

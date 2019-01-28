@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.red{/*元素中尚未取类名,将次类名副给某些元素,就能使这些元素获得此类的各个性质*/
+width: 100px;
+height: 100px;
+background-color: red;
+display: ;
+float: left;
+}
+.blue{
+width: 100px;
+height: 100px;
+background-color: blue;
+display: ;
+float: left;
+}
+#d1{
+width: 300px;
+padding-right: px;
+border: 1px solid black;}
+
+
+</style>
+<script type="text/javascript">
+ 	function addfn(color){
+ 		var div = document.getElementById("d1");
+ 		var str ="<div class="+color+"></div>";
+ 		//var div ="<div class='color'></div>";
+ 		//div=div.replace("color",color);
+ 		d1.innerHTML+=str;
+ 	}
+ 	
+</script>
+</head>
+<body>
+  <input type="button"  onclick="addfn('red')">
+  <input type="button"  onclick="addfn('blue')">
+ </div><div id="d1"></div>
+   
+</body>
+</html>
+
+
+

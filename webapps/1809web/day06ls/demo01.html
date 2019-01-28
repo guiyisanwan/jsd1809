@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#big{
+		width: 100px;
+		height: 100px;
+		background-color: purple;
+		position: relative;
+	}
+	#big>div{
+		width: 30px;
+		height: 30px;
+		position: absolute;
+	}
+	#d1{
+		background-color: red;
+		 
+	}
+	#d2{
+		background-color: green;
+		 
+	}
+	#d3{
+		background-color: blue;
+		z-index: -100;
+	}
+</style>
+</head>
+<body>
+<div id="big">
+	<div id="d1"></div>
+	<div id="d2"></div>
+	<div id="d3"></div>
+</div>
+</body>
+</html>

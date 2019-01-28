@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function test(){
+	var num = 3.1415926;
+	//Fixed 固定的，返回固定小数点位数
+	//输出价格等情况
+	console.log(num.toFixed(2));
+	console.log(num.toFixed(4));
+	var str = "tedu.cn";
+	var n = str.indexOf("cn");
+	console.log(n);//5
+	var c = str.charAt(5);
+	console.log(c);//c
+	var b = str.blod();
+	console.log(b);
+} 
+//显示加粗的 文字
+function demo01(){
+	var str = "测试";
+	var msg = str.bold();
+	//用id在document对象中找到 div元素 
+	var div=document.getElementById("msg");
+	//innerHTML 读写 div元素内部的内容
+	div.innerHTML=msg;
+}
+//显示红色的文字
+function demo02(){
+	var str = "测试";
+	var msg = str.fontcolor("red");
+	//用id在document对象中找到 div元素 
+	var div=document.getElementById("msg");
+	//innerHTML 读写 div元素内部的内容
+	div.innerHTML=msg;	
+}
+</script>
+</head>
+<body>
+	<h1>Number 和 String</h1>
+	<p onclick="test()">测试</p>
+	<h1>页面局部刷新</h1>
+	<div onclick="demo02()" >red</div>
+	<div id="msg" onclick="demo01()">Test</div>
+</body>
+</html>
+
+
+
+

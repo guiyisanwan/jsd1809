@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>过滤器</h1>
+	<table id="tbl">
+		<tr>
+			<td>编号</td><td>名称</td>
+		</tr>
+		<tr>
+			<td>1</td><td>熊大</td>
+		</tr>
+		<tr>
+			<td>2</td><td>熊二</td>
+		</tr>
+		<tr>
+			<td>3</td><td>光头强</td>
+		</tr>
+		<tr>
+			<td>合计</td><td>3</td>
+		</tr>
+	</table>
+<script type="text/javascript"
+	src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//偶数行浅灰色
+	//选择全部 tr 中的偶数行: 0 2 4 6 8
+	//JQuery API css()方法，作用是为每个被选中
+	//的元素添加“内联样式” 
+	$('tr:even').css('background-color','#eee');	
+	//奇数行深灰色
+	$('tr:odd').css('background-color','#ddd');
+	//首行 反白 
+	$('tr:first').css('background-color','#000')
+		.css('color', '#fff');
+	$('tr:last').css('background-color','#0f0')
+		.css('color', '#f00');
+	//选中指定序号的行 
+	$('tr:eq(2)').css('color','#f00');
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

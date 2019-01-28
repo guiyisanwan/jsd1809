@@ -1,0 +1,104 @@
+###给元素对象添加样式
+	div.style.样式名称="样式的值";
+
+###元素隐藏的两种方式
+1. visibility="hidden" //不脱离文档流 元素隐藏后仍然占位置
+2. display="none"   //脱离文档流 不占位置
+
+
+
+###Low轮播图实现步骤：
+1. 在页面中添加一个div 在div里面添加三个img
+2. 通过内部样式让img和div设置相同宽200高150
+3. 在script标签中添加定时器 每隔1秒执行代码
+4. 声明一个全局的count，在定时器中自增并且对3取余数 
+5. 在定时器中获取所有图片并且遍历
+6. 遍历时判断i的值是否等于第4步得到的余数，如果相等让当前遍历的图片元素显示，如果不等则让图片隐藏
+
+####定时器
+1. var timer = setInterval(方法,时间间隔)  每隔一段时间调用一次方法
+	停止：clearInterval(timer)
+2. setTimeout(方法,时间间隔)  隔一段时间调用一次方法（只执行一次）
+
+###DOM 文档对象模型(包含和页面相关的内容)
+- 学习DOM主要学习的就是如何对页面中的元素进行增删改查操作
+####查找页面中的元素
+1. 通过id查找元素
+	var div = document.getElementById("id");
+2. 通过标签名查找元素
+	var arr = document.getElementsByTagName("标签名");
+3. 通过class查找元素
+	var arr = document.getElementsByClassName("class");
+4. 通过name属性值查找元素
+	var arr = document.getElementsByName("name");
+5. 获取页面中body元素
+	document.body
+6. 获取元素的上级元素
+	div.parentElement
+###创建元素对象
+	var h3 = document.createElement("h3");
+	h3.innerHTML="我是h3";
+###添加元素
+	父元素.appendChild(h3);
+###插入元素
+	父元素.insertBefore(新元素,弟弟元素);
+###删除元素
+	父元素.removeChild(删除的元素); 
+	删除的元素.parentElement.removeChild(删除的元素);
+
+###事件的动态绑定
+- 通过js代码给元素添加事件称为 事件的动态绑定，动态绑定的事件方法中的this代表事件源（添加事件的标签）
+
+
+###鼠标大战僵尸步骤：
+1. 开启定时器每隔1秒执行一次，在定时器里面创建img图片 设置图片为zomb0.png,然后把图片添加到body里面
+2. 通过css让img标签的定位方式为绝对定位，设置图片的宽80 高90
+3. 在创建完img标签的位置设置img图片的位置left为屏幕的宽度，top为屏幕高的随机值
+4. 开启另外一个定时器，每秒执行100次，在定时器里面获取所有img，然后遍历，获取每一个img标签 修改其left值 让left值-2 再赋值回去，则可以实现僵尸移动的功能
+
+###js中的事件
+- 什么是事件： 指一些特定的时间点，事件包括：鼠标事件、键盘事件、状态改变事件。
+- 鼠标事件： onclick(点击事件)  onmouseover(鼠标移入事件) onmouseout(鼠标移出事件),  onmousedown(鼠标按下) onmouseup(鼠标松开) onmousemove(鼠标移动)
+- 状态改变事件： onload(页面加载完成事件) onfocus(获取焦点事件) onblur(失去焦点事件) onsubmit(提交事件) onchange(value值改变事件) onresize(窗口尺寸改变事件)
+- 键盘事件： onkeydown(键盘按下事件)  onkeyup(键盘抬起事件)
+###事件绑定
+1. 标签内部通过事件属性添加事件 ， 事件方法中的this代表Window对象
+2. 动态绑定事件，好处：可以让js代码和html代码分离 ，动态绑定事件的方法中的this代表事件源
+###事件取消
+- 在事件中执行return false； 则可以取消当前事件
+###事件对象event
+1. 在鼠标事件中可得到鼠标的坐标  event.clientX/Y()
+2. 在键盘事件中可以得到键盘按键的编码 event.keyCode();
+3. 在任何事件中可以得到事件源  event.target  event.srcElement 
+	var obj = event.target||event.srcElement;
+###事件传递(事件冒泡)
+- 如果一个范围有多个事件需要响应，则响应顺序为从底层往上层传递，这个过程类似于冒泡效果，所以又称为事件冒泡 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

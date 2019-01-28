@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function test(){
+	//创建Date类型时候内部包含当前时间毫秒数
+	var d = new Date();
+	//获取时间毫秒数
+	var time = d.getTime();
+	//转换为本地时间字符串
+	var str = d.toLocaleString();
+	console.log(d);
+	console.log(time);
+	console.log(str);
+	
+	var s = document.getElementById("msg");
+	s.innerHTML=str;
+}
+</script>
+</head>
+<body>
+	<h1>Date类型</h1>
+	<div onclick="test()">测试</div>	
+	<span id="msg"></span>
+</body>
+</html>
+
+
+
+
+

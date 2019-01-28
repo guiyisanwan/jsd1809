@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function Person(name,age){
+		//声明属性并赋值
+		this.name=name;
+		this.age=age;
+		//声明方法
+		this.run=function(){
+			alert("name:"+name+"age:"+age);
+		}
+	}
+	//创建person对象
+	var p = new Person("关羽",20);
+	p.run();
+	
+	/* 先声明Student 属性有name chinese math english
+		添加run方法 ，在方法中弹出 
+		我叫xxx，我语文：xx 数学xx 英语xx 我在跑！
+	*/
+	function Student(name,chinese,math,english){
+		this.name=name;
+		this.chinese=chinese;
+		this.math=math;
+		this.english=english;
+		this.run=function(){
+			alert("我叫"+name+"，我语文："+chinese
+					+" 数学:"+math+" 英语:"
+					+english+" 我在跑！");
+		}
+	}
+	var s1 = new Student("张飞",23,18,99);
+	s1.run();
+	
+	
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>

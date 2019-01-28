@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div,img{
+		width: 200px;
+		height: 150px;
+	}
+	div{
+		position: relative;/* 做位置参考 */
+		overflow: hidden;
+	}
+	img{
+		position: absolute;
+	}
+</style>
+<script type="text/javascript">
+	
+	onload = function(){
+		var arr = 
+			document.getElementsByTagName("img");
+		for(var i=0;i<arr.length;i++){
+			//修改每张图片的left值
+			arr[i].style.left=i*200+"px";
+		}
+	}
+	
+	/* onclick = function(){
+		move();
+	} */
+	
+	//每隔2秒调用move方法
+	var timer = setInterval(move,2000);
+	
+	
+	//移动图片的方法
+	function move(){
+		var moveTimer = setInterval(function(){
+			var arr = 
+				document.getElementsByTagName("img");
+			for(var i=0;i<arr.length;i++){
+				var img = arr[i];
+				//得到原来left的值
+				var oldLeft = parseInt(img.style.left);
+				oldLeft-=4;
+				
+				//如果图片移出则放到最后
+				if(oldLeft<=-200){
+					oldLeft=(arr.length-1)*200;
+					//让定时器停止
+					clearInterval(moveTimer);
+				}
+				//把值再赋值回去
+				img.style.left=oldLeft+"px";
+			}
+		},10)
+		
+	}
+	
+	//停止
+	function stop(){
+		clearInterval(timer);
+	}
+	//开始
+	function start(){
+		//关闭上一个定时器
+		clearInterval(timer);
+		//重新开始执行
+		timer = setInterval(move,2000);
+	}
+	
+	/* 失去焦点事件 */
+	onblur = function(){
+		clearInterval(timer);
+	}
+	/* 获取焦点 */
+	onfocus = function(){
+		
+		//关闭上一个定时器
+		clearInterval(timer);
+		//重新开始执行
+		timer = setInterval(move,2000);
+	}
+	
+	
+</script>
+</head>
+<body>
+<div onmouseover="stop()" onmouseout="start()">
+	<a href="http://www.tmooc.cn">
+	<img src="../imgs/a.jpg"></a>
+	<a href="http://doc.tedu.cn">
+	<img src="../imgs/b.jpg"></a>
+	<a href="../imgs/2.gif">
+	<img src="../imgs/k.jpg"></a>
+</div>
+</body>
+</html>
+
+
+
+
